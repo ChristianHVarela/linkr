@@ -5,6 +5,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' />
+        <Route path='/posts' />
       </Routes>
     </BrowserRouter>
   );
