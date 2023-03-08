@@ -4,14 +4,14 @@ import HomeLogo from "../../components/home/homeLogo";
 import { FormContainer, HomeStyle } from "../../components/home/homeStyles";
 import api from "../../config/api";
 import { ThreeDots } from  'react-loader-spinner'
-import userContext from "../../contexts/userContext";
+import { AuthContext } from "../../contexts/authContext";
 
 export default function Signin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const { setUser } = useContext(userContext);
+    const { setToken, setImage } = useContext(AuthContext);
 
     async function submitSignIn(event) {
         event.preventDefault();
@@ -20,8 +20,10 @@ export default function Signin() {
         {
             api.post('/', { email, password })
                 .then((res) => {
-                    setUser(res.data);
-                    console.log(res.data);
+                    localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("image", res.data.image);
+                    setToken(res.data.token);
+                    setImage(res.data.image);
                     navigate('/timeline');
                 })
                 .catch(e => {

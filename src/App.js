@@ -1,15 +1,12 @@
-import { useContext, useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
-import userContext from './contexts/userContext';
+import AuthProvider from './contexts/authContext';
 import Posts from './pages/posts';
 import Signin from './pages/signin/signin';
 import Signup from './pages/signup/signup';
 
 function App() {
-  const [user, setUser] = useState(useContext(userContext));
-
   return (
-    <userContext.Provider value={{user, setUser}} >
+    <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={ <Signin /> } />
@@ -17,8 +14,7 @@ function App() {
           <Route path='/posts' element={ <Posts /> } />
         </Routes>
       </BrowserRouter>
-    </userContext.Provider>
-
+    </AuthProvider>
   );
 }
 
