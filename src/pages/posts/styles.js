@@ -17,4 +17,5 @@ export const Title = styled.p`
     color: #FFFFFF;
     width: 610px;
     text-align: left;
+    margin-bottom: 40px;
 `
