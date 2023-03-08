@@ -4,7 +4,7 @@ import { useState } from "react";
 import { DesktopMenu, HeaderMenuContainer, Logout, MobileMenu } from "./styles";
 
 export default function HeaderMenu() {
-  const IMAGE_TEST = "https://wallpaperaccess.com/full/641507.jpg";
+  const MOCK_IMAGE = "https://wallpaperaccess.com/full/641507.jpg";
 
   const [showLogout, setShowLogout] = useState(false);
 
@@ -22,7 +22,7 @@ export default function HeaderMenu() {
           <div className="profile" onClick={() => setShowLogout(!showLogout)}>
             <MdOutlineKeyboardArrowDown className="arrowDown" />
             <MdKeyboardArrowUp className="arrowUp" />
-            <img src={IMAGE_TEST} alt="" />
+            <img src={MOCK_IMAGE} alt="" />
           </div>
         </DesktopMenu>
 
@@ -32,7 +32,7 @@ export default function HeaderMenu() {
             <div className="profile" onClick={() => setShowLogout(!showLogout)}>
               <MdOutlineKeyboardArrowDown className="arrowDown" />
               <MdKeyboardArrowUp className="arrowUp" />
-              <img src={IMAGE_TEST} alt="" />
+              <img src={MOCK_IMAGE} alt="" />
             </div>
           </div>
         </MobileMenu>
