@@ -1,63 +1,7 @@
 import styled from "styled-components";
-import { RxMagnifyingGlass } from "react-icons/rx";
-import { MdOutlineKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import { useState } from "react";
 
-export default function HeaderMenu() {
-  const IMAGE_TEST = "https://wallpaperaccess.com/full/641507.jpg";
 
-  const [showLogout, setShowLogout] = useState(false);
-
-  return (
-    <>
-      <HeaderMenuContainer>
-        <DesktopMenu showLogout={showLogout}>
-          <h1>linkr</h1>
-          <div className="search-box">
-            <input type="text" placeholder="Search for people" />
-            <button type="submit">
-              <RxMagnifyingGlass />
-            </button>
-          </div>
-          <div className="profile" onClick={() => setShowLogout(!showLogout)}>
-            <MdOutlineKeyboardArrowDown className="arrowDown" />
-            <MdKeyboardArrowUp className="arrowUp" />
-            <img src={IMAGE_TEST} alt="" />
-          </div>
-        </DesktopMenu>
-
-        <MobileMenu>
-          <div>
-            <h1>LINKR</h1>
-            <div className="profile" onClick={() => setShowLogout(!showLogout)}>
-              <MdOutlineKeyboardArrowDown className="arrowDown" />
-              <MdKeyboardArrowUp className="arrowUp" />
-              <img src={IMAGE_TEST} alt="" />
-            </div>
-          </div>
-        </MobileMenu>
-{/* 
-        <MobileSearchBox>
-          teste
-          <div className="search-box">
-            <input type="text" placeholder="Search for people" />
-            <button type="submit">
-              <RxMagnifyingGlass />
-            </button>
-          </div>
-        </MobileSearchBox> */}
-      </HeaderMenuContainer>
-
-      <Logout showLogout={showLogout}>
-        <div>
-          <h3>Logout</h3>
-        </div>
-      </Logout>
-    </>
-  );
-}
-
-const HeaderMenuContainer = styled.header`
+export const HeaderMenuContainer = styled.header`
   width: 100%;
   height: 72px;
   background: #151515;
@@ -69,7 +13,7 @@ const HeaderMenuContainer = styled.header`
   }
 `;
 
-const DesktopMenu = styled.div`
+export const DesktopMenu = styled.div`
   width: 1440px;
   display: flex;
   justify-content: space-between;
@@ -160,7 +104,7 @@ const DesktopMenu = styled.div`
   }
 `;
 
-const MobileMenu = styled.div`
+export const MobileMenu = styled.div`
   display: none;
 
   @media screen and (max-width: 895px) {
@@ -228,7 +172,8 @@ const MobileMenu = styled.div`
     }
   }
 `;
-const MobileSearchBox = styled.div`
+
+export const MobileSearchBox = styled.div`
   display: none;
 
   @media screen and (max-width: 895px) {
@@ -265,7 +210,7 @@ const MobileSearchBox = styled.div`
   }
 `;
 
-const Logout = styled.div`
+export const Logout = styled.div`
   display: ${({ showLogout }) => (showLogout ? "flex" : "none")};
   justify-content: flex-end;
 

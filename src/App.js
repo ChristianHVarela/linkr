@@ -1,8 +1,7 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
-import HeaderMenu from './components/HeaderMenu/HeaderMenu';
+import HeaderMenu from './components/HeaderMenu/index';
 import Posts from './pages/posts';
 import Signup from './pages/signup/signup';
-import UserPage from './pages/user.page/User.Page';
 
 function App() {
   return (
@@ -12,7 +11,6 @@ function App() {
         <Route path='/' />
         <Route path='/signup' element={ <Signup />} />
         <Route path='/posts' element={ <Posts /> } />
-        <Route path="/user/:id" element={ <UserPage />} />
       </Routes>
     </BrowserRouter>
   );
