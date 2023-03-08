@@ -1,6 +1,7 @@
 import { Container, HLine, HashList, Hashtag } from "./styles";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import api from "../../config/api";
 
 const MOCKDATA = [
 	{ id: 1, hashtag: "react" },
@@ -15,15 +16,20 @@ const MOCKDATA = [
 	{ id: 10, hashtag: "reactquery" },
 ];
 
-async function getTrending() {
-	const { data } = await axios.get("/trending");
-	return data;
-}
+
 
 function Trending() {
 	const [trending, setTrending] = useState([]);
+	async function getTrending() {
+		try{
+			const { data } = await api.get("/trending");
+			setTrending(data);
+		} catch(err){
+			alert("Erro ao carregar os trending.");
+		}
+	}
 	useEffect(() => {
-		setTrending(getTrending());
+		getTrending();
 	});
 	return (
 		<Container>
