@@ -5,20 +5,27 @@ import api from '../../config/api.js'
 const PostCreation = (props) => {
     const [link, setLink] = useState("")
     const [description, setDescription] = useState("")
+    const [loading, setLoading] = useState(false)
     const { imageUrl } = props
 
     const handleChange = (e) => {
         e.preventDefault()
         if (!link || !description){
             alert("You must fill in all fields!")
+        } else {
+            savePosts()
         }
-        savePosts()
     }
 
     const savePosts = async () => {
         try {
+            setLoading(true)
             const data = await api.post('/posts', {link, description})
-            console.log(data);
+            if (data.status === 201){
+                setLoading(false)
+                setLink("")
+                setDescription("")
+            }
         } catch (error) {
             console.log(error);
         }
@@ -26,15 +33,15 @@ const PostCreation = (props) => {
 
     return (
         <S.Container>
-            <div>
+            <S.ContainerImageProfile>
                 <S.ImageProfile src={imageUrl} alt="" />
-            </div>
+            </S.ContainerImageProfile>
             <S.FormPost onSubmit={handleChange}>
                 <S.Title>What are you going to share today?</S.Title>
-                <S.InputLink placeholder="http://..." onChange={e => setLink(e.target.value)} value={link} />
-                <S.InputDescription placeholder="Awesome article about #javascript" onChange={e => setDescription(e.target.value)} value={description} />
+                <S.InputLink placeholder="http://..." onChange={e => setLink(e.target.value)} value={link} readOnly={loading} />
+                <S.InputDescription placeholder="Awesome article about #javascript" onChange={e => setDescription(e.target.value)} value={description} readOnly={loading} />
                 <S.ContainerButtonSubmit>
-                    <S.ButtonSubmit>Publish</S.ButtonSubmit>
+                    <S.ButtonSubmit disabled={loading}>{loading ? "Publishing..." : "Publish"}</S.ButtonSubmit>
                 </S.ContainerButtonSubmit>
             </S.FormPost>
         </S.Container>

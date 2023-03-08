@@ -18,4 +18,8 @@ export const Title = styled.p`
     width: 610px;
     text-align: left;
     margin-bottom: 40px;
+    @media (max-width: 710px){
+        width: 100vw;
+        margin-left: 1.5rem;
+    }
 `
