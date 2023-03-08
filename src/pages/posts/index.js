@@ -1,5 +1,6 @@
 import { useState } from "react"
 import PostCreation from "../../components/PostCreation"
+import Timeline from "../../components/Timeline"
 import { Container, Title } from "./styles"
 
 const Posts = () => {
@@ -8,6 +9,7 @@ const Posts = () => {
         <Container>
             <Title>timeline</Title>
             <PostCreation imageUrl={imageUrl} />
+            <Timeline />
         </Container>
     )
 }
