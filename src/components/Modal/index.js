@@ -1,9 +1,25 @@
 import * as S from "./styles";
 import Modal from "react-modal";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/authContext";
+import api from "../../config/api";
 
 Modal.setAppElement("#root");
 
 function DeleteModal({ modalIsOpen, setModalIsOpen,id }) {
+
+    const { config } = useContext(AuthContext);
+    async function deletePost(){
+        try{
+            await api.delete(`/posts/${id}`, config);
+            setModalIsOpen(false);
+            window.location.reload(); //temporario
+        } catch(err){
+            setModalIsOpen(false);
+            alert("Error while deleting post.")
+        }
+    }
+
 	return (
 		<Modal
 			isOpen={modalIsOpen}
@@ -24,7 +40,7 @@ function DeleteModal({ modalIsOpen, setModalIsOpen,id }) {
 					</S.ModalButton>
 					<S.ModalButton
 						className="confirm"
-						onClick={() => setModalIsOpen(false)}
+						onClick={deletePost}
 					>
 						Yes, delete it
 					</S.ModalButton>
