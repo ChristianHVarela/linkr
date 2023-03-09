@@ -20,6 +20,7 @@ export const ImageProfile = styled.img`
     border-radius: 26.5px;
     margin-top: 17px;
     margin-left: 17px;
+    object-fit: cover;
 `
 export const ContainerContent = styled.div`
     width: 500px;
