@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import PostCreation from "../../components/PostCreation"
 import Timeline from "../../components/Timeline"
 import api from "../../config/api"
+import { AuthContext } from "../../contexts/authContext"
 import * as S from "./styles"
 
 const Posts = () => {
     const [posts, setPosts] = useState(null)
+    const { config } = useContext(AuthContext);
 
     useEffect(() => {
         getPosts();
@@ -17,7 +19,7 @@ const Posts = () => {
 
     const getPosts = async () => {
         try {
-            const { data } = await api.get('/timeline')
+            const { data } = await api.get('/timeline', config)
             setPosts(data)
         } catch (error) {
             alert('An error occured while trying to fetch the posts, please refresh the page')

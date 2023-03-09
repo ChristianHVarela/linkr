@@ -22,10 +22,14 @@ const PostTimeline = (props) => {
 				<S.ContainerContent>
 					<S.PostTop>
 						<S.UserName>{post.user_name}</S.UserName>
-						<div>
-							<FaPencilAlt />
-							<FaTrashAlt onClick={() => setModalIsOpen(true)} />
-						</div>
+						{post.author_match && (
+							<div>
+								<FaPencilAlt />
+								<FaTrashAlt
+									onClick={() => setModalIsOpen(true)}
+								/>
+							</div>
+						)}
 					</S.PostTop>
 					<div>
 						<ReactTagify
