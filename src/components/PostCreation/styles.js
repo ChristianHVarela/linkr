@@ -19,7 +19,6 @@ export const ContainerImageProfile = styled.div`
         display: none;
     }
 `
-
 export const ImageProfile = styled.img`
     width: 50px;
     height: 50px;
