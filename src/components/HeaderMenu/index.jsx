@@ -1,28 +1,84 @@
 import { RxMagnifyingGlass } from "react-icons/rx";
 import { MdOutlineKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import { useState } from "react";
-import { DesktopMenu, HeaderMenuContainer, Logout, MobileMenu } from "./styles";
+import { useContext, useEffect, useState } from "react";
+import { DebounceInput } from "react-debounce-input";
+import {
+  DesktopMenu,
+  DesktopSearchBox,
+  HeaderMenuContainer,
+  Logout,
+  MobileMenu,
+  SearchResult,
+} from "./styles";
+import { AuthContext } from "../../contexts/authContext";
+import api from "../../config/api";
 
 export default function HeaderMenu() {
-  const MOCK_IMAGE = "https://wallpaperaccess.com/full/641507.jpg";
+  const [showMenu, setShowMenu] = useState(false);
 
   const [showLogout, setShowLogout] = useState(false);
 
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const [searchResults, setSearchResults] = useState([]);
+
+  const { token, image } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (token !== "") {
+      setShowMenu(true);
+    }
+  }, [token]); 
+
+  async function searchingUser(e) {
+    setSearchQuery(e.target.value);
+    const searchText = { searchQuery: e.target.value };
+    console.log(searchText);
+    if (searchText.searchQuery.length >= 3) {
+      try {
+        const searchResult = await api.post("/user", searchText);
+        setSearchResults(searchResult.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+  function submitSearch(event) {
+    event.preventDefault();
+    console.log("ok");
+  }
+
   return (
     <>
-      <HeaderMenuContainer>
-        <DesktopMenu showLogout={showLogout}>
+      <HeaderMenuContainer showMenu={showMenu}>
+        <DesktopMenu showLogout={showLogout} onSubmit={submitSearch}>
           <h1>linkr</h1>
-          <div className="search-box">
-            <input type="text" placeholder="Search for people" />
+          <DesktopSearchBox searchQuery={searchQuery}>
+            <DebounceInput
+              debounceTimeout={300}
+              forceNotifyByEnter={true}
+              type="text"
+              placeholder="Search for people"
+              value={searchQuery}
+              onChange={(e) => searchingUser(e)}
+            />
             <button type="submit">
               <RxMagnifyingGlass />
             </button>
-          </div>
+            <SearchResult searchQuery={searchQuery}>
+              {searchResults.map((m) => (
+                <div key={m.id}>
+                  <img src={m.image} alt="" />
+                  <p>{m.name}</p>
+                </div>
+              ))}
+            </SearchResult>
+          </DesktopSearchBox>
           <div className="profile" onClick={() => setShowLogout(!showLogout)}>
             <MdOutlineKeyboardArrowDown className="arrowDown" />
             <MdKeyboardArrowUp className="arrowUp" />
-            <img src={MOCK_IMAGE} alt="" />
+            <img src={image} alt="" />
           </div>
         </DesktopMenu>
 
@@ -32,11 +88,11 @@ export default function HeaderMenu() {
             <div className="profile" onClick={() => setShowLogout(!showLogout)}>
               <MdOutlineKeyboardArrowDown className="arrowDown" />
               <MdKeyboardArrowUp className="arrowUp" />
-              <img src={MOCK_IMAGE} alt="" />
+              <img src={image} alt="" />
             </div>
           </div>
         </MobileMenu>
-{/* 
+        {/* 
         <MobileSearchBox>
           teste
           <div className="search-box">
@@ -56,4 +112,3 @@ export default function HeaderMenu() {
     </>
   );
 }
-

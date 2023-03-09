@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
-
 export const HeaderMenuContainer = styled.header`
   width: 100%;
   height: 72px;
   background: #151515;
-  display: flex;
+  display: ${({ showMenu }) => (showMenu ? "flex" : "none")};
   justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
 
   @media screen and (max-width: 895px) {
     flex-direction: column;
@@ -28,46 +30,6 @@ export const DesktopMenu = styled.div`
     letter-spacing: 0.05em;
     color: #ffffff;
     /* width: 438.5px; */
-  }
-
-  input {
-    width: 563px;
-    height: 45px;
-    left: 437px;
-    top: 13px;
-    background: #ffffff;
-    border-radius: 8px;
-    border-style: none;
-    padding: 9px 14px;
-    box-sizing: border-box;
-  }
-
-  .search-box {
-    position: relative;
-    display: inline-block;
-  }
-
-  .search-box input[type="text"] {
-    padding-right: 40px; /* Adjust this value as needed */
-  }
-
-  .search-box button[type="submit"] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px;
-    background-color: #f2f2f2;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .search-box button[type="submit"] i {
-    color: #555;
   }
 
   div.profile {
@@ -101,6 +63,80 @@ export const DesktopMenu = styled.div`
 
   @media screen and (max-width: 895px) {
     display: none;
+  }
+`;
+
+export const DesktopSearchBox = styled.form`
+  position: relative;
+  display: inline-block;
+
+  input {
+    width: 563px;
+    height: 45px;
+    left: 437px;
+    top: 13px;
+    background: #ffffff;
+    border-radius: ${({ searchQuery }) =>
+      searchQuery.length >= 3 ? " 8px 8px 0px 0px" : "8px"};
+    border-style: none;
+    padding: 9px 14px;
+    box-sizing: border-box;
+    color: #515151;
+
+    ::placeholder {
+      color: #c6c6c6;
+    }
+  }
+
+  button[type="submit"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    height: 90%;
+    font-size: 20px;
+    color: #c6c6c6;
+    margin-right: 14px;
+  }
+`;
+
+export const SearchResult = styled.div`
+  background-color: white;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  border-radius: 0px 0px 8px 8px;
+  display: ${({ searchQuery }) =>
+      searchQuery.length >= 3 ? "flex" : "none"};;
+  flex-direction: column;
+
+  div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  img {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+
+  p {
+    font-family: "Lato";
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 23px;
+    color: #515151;
   }
 `;
 
@@ -213,6 +249,10 @@ export const MobileSearchBox = styled.div`
 export const Logout = styled.div`
   display: ${({ showLogout }) => (showLogout ? "flex" : "none")};
   justify-content: flex-end;
+  background-color: transparent;
+  position: fixed;
+  top: 72px;
+  right: 0;
 
   div {
     display: flex;
@@ -222,7 +262,7 @@ export const Logout = styled.div`
     height: 47px;
     left: 1307px;
     top: 72px;
-    background: #171717;
+    background: #151515;
     border-radius: 0px 0px 0px 15px;
 
     font-family: "Lato";
