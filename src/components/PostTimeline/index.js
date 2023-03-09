@@ -43,7 +43,7 @@ const PostTimeline = (props) => {
 				</S.ContainerContent>
 			</S.ContainerPost>
 			<DeleteModal
-				id={props.id}
+				id={post.id}
 				modalIsOpen={modalIsOpen}
 				setModalIsOpen={setModalIsOpen}
 			/>

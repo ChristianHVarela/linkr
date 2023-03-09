@@ -1,20 +1,25 @@
 import * as S from "./styles";
 import Modal from "react-modal";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import api from "../../config/api";
+import { ThreeDots } from "react-loader-spinner";
 
 Modal.setAppElement("#root");
 
 function DeleteModal({ modalIsOpen, setModalIsOpen,id }) {
-
+    const [request, setRequest] = useState(false);
     const { config } = useContext(AuthContext);
     async function deletePost(){
+        setRequest(true);
         try{
             await api.delete(`/posts/${id}`, config);
             setModalIsOpen(false);
+            setRequest(false);
             window.location.reload(); //temporario
         } catch(err){
+            setRequest(false);
+            console.log(err);
             setModalIsOpen(false);
             alert("Error while deleting post.")
         }
@@ -31,7 +36,11 @@ function DeleteModal({ modalIsOpen, setModalIsOpen,id }) {
 				<S.ModalText>
 					Are you sure you want to delete this post?
 				</S.ModalText>
-				<div>
+				{request?
+                <ThreeDots 
+                    color="#FFFFFF"
+                />:
+                <div>
 					<S.ModalButton
 						className="cancel"
 						onClick={() => setModalIsOpen(false)}
@@ -44,7 +53,7 @@ function DeleteModal({ modalIsOpen, setModalIsOpen,id }) {
 					>
 						Yes, delete it
 					</S.ModalButton>
-				</div>
+				</div>}
 			</S.ModalDiv>
 		</Modal>
 	);
