@@ -4,8 +4,11 @@ export const HeaderMenuContainer = styled.header`
   width: 100%;
   height: 72px;
   background: #151515;
-  display: flex;
+  display: ${({ showMenu }) => (showMenu ? "flex" : "none")};
   justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
 
   @media screen and (max-width: 895px) {
     flex-direction: column;
@@ -63,7 +66,7 @@ export const DesktopMenu = styled.div`
   }
 `;
 
-export const DesktopSearchBox = styled.div`
+export const DesktopSearchBox = styled.form`
   position: relative;
   display: inline-block;
 
@@ -73,7 +76,8 @@ export const DesktopSearchBox = styled.div`
     left: 437px;
     top: 13px;
     background: #ffffff;
-    border-radius: 8px;
+    border-radius: ${({ searchQuery }) =>
+      searchQuery.length >= 3 ? " 8px 8px 0px 0px" : "8px"};
     border-style: none;
     padding: 9px 14px;
     box-sizing: border-box;
@@ -101,7 +105,39 @@ export const DesktopSearchBox = styled.div`
     color: #c6c6c6;
     margin-right: 14px;
   }
+`;
 
+export const SearchResult = styled.div`
+  background-color: white;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  border-radius: 0px 0px 8px 8px;
+  display: ${({ searchQuery }) =>
+      searchQuery.length >= 3 ? "flex" : "none"};;
+  flex-direction: column;
+
+  div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  img {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+
+  p {
+    font-family: "Lato";
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 23px;
+    color: #515151;
+  }
 `;
 
 export const MobileMenu = styled.div`
@@ -213,6 +249,10 @@ export const MobileSearchBox = styled.div`
 export const Logout = styled.div`
   display: ${({ showLogout }) => (showLogout ? "flex" : "none")};
   justify-content: flex-end;
+  background-color: transparent;
+  position: fixed;
+  top: 72px;
+  right: 0;
 
   div {
     display: flex;
@@ -222,7 +262,7 @@ export const Logout = styled.div`
     height: 47px;
     left: 1307px;
     top: 72px;
-    background: #171717;
+    background: #151515;
     border-radius: 0px 0px 0px 15px;
 
     font-family: "Lato";

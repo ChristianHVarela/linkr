@@ -8,11 +8,12 @@ import Signup from './pages/signup/signup';
 function App() {
   return (
     <AuthProvider>
+      <HeaderMenu />
       <BrowserRouter>
         <Routes>
           <Route path='/' element={ <Signin /> } />
           <Route path='/signup' element={ <Signup />} />
-          <Route path='/posts' element={ <Posts /> } />
+          <Route path='/timeline' element={ <Posts /> } />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
