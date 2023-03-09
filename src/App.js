@@ -1,4 +1,5 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import HeaderMenu from './components/HeaderMenu';
 import AuthProvider from './contexts/authContext';
 import Posts from './pages/posts';
 import Signin from './pages/signin/signin';
