@@ -13,7 +13,7 @@ export default function Signup() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
-    async function submitSignUp(event) {
+    function submitSignUp(event) {
         event.preventDefault();
         setLoading(true);
         try

@@ -1,12 +1,14 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import HeaderMenu from './components/HeaderMenu';
 import AuthProvider from './contexts/authContext';
 import Posts from './pages/posts';
-import Signin from './pages/signin/signin';
-import Signup from './pages/signup/signup';
+import Signin from './pages/signin/index';
+import Signup from './pages/signup/index';
 
 function App() {
   return (
     <AuthProvider>
+      <HeaderMenu />
       <BrowserRouter>
         <Routes>
           <Route path='/' element={ <Signin /> } />
