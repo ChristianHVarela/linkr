@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const HeaderMenuContainer = styled.header`
   width: 100%;
   height: 72px;
@@ -28,46 +27,6 @@ export const DesktopMenu = styled.div`
     letter-spacing: 0.05em;
     color: #ffffff;
     /* width: 438.5px; */
-  }
-
-  input {
-    width: 563px;
-    height: 45px;
-    left: 437px;
-    top: 13px;
-    background: #ffffff;
-    border-radius: 8px;
-    border-style: none;
-    padding: 9px 14px;
-    box-sizing: border-box;
-  }
-
-  .search-box {
-    position: relative;
-    display: inline-block;
-  }
-
-  .search-box input[type="text"] {
-    padding-right: 40px; /* Adjust this value as needed */
-  }
-
-  .search-box button[type="submit"] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px;
-    background-color: #f2f2f2;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .search-box button[type="submit"] i {
-    color: #555;
   }
 
   div.profile {
@@ -102,6 +61,47 @@ export const DesktopMenu = styled.div`
   @media screen and (max-width: 895px) {
     display: none;
   }
+`;
+
+export const DesktopSearchBox = styled.div`
+  position: relative;
+  display: inline-block;
+
+  input {
+    width: 563px;
+    height: 45px;
+    left: 437px;
+    top: 13px;
+    background: #ffffff;
+    border-radius: 8px;
+    border-style: none;
+    padding: 9px 14px;
+    box-sizing: border-box;
+    color: #515151;
+
+    ::placeholder {
+      color: #c6c6c6;
+    }
+  }
+
+  button[type="submit"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    height: 90%;
+    font-size: 20px;
+    color: #c6c6c6;
+    margin-right: 14px;
+  }
+
 `;
 
 export const MobileMenu = styled.div`

@@ -1,7 +1,7 @@
 import { RxMagnifyingGlass } from "react-icons/rx";
 import { MdOutlineKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { useState } from "react";
-import { DesktopMenu, HeaderMenuContainer, Logout, MobileMenu } from "./styles";
+import { DesktopMenu, DesktopSearchBox, HeaderMenuContainer, Logout, MobileMenu } from "./styles";
 
 export default function HeaderMenu() {
   const MOCK_IMAGE = "https://wallpaperaccess.com/full/641507.jpg";
@@ -13,12 +13,12 @@ export default function HeaderMenu() {
       <HeaderMenuContainer>
         <DesktopMenu showLogout={showLogout}>
           <h1>linkr</h1>
-          <div className="search-box">
+          <DesktopSearchBox>
             <input type="text" placeholder="Search for people" />
             <button type="submit">
               <RxMagnifyingGlass />
             </button>
-          </div>
+          </DesktopSearchBox>
           <div className="profile" onClick={() => setShowLogout(!showLogout)}>
             <MdOutlineKeyboardArrowDown className="arrowDown" />
             <MdKeyboardArrowUp className="arrowUp" />
