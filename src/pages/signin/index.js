@@ -13,7 +13,7 @@ export default function Signin() {
     const [loading, setLoading] = useState(false);
     const { setToken, setImage } = useContext(AuthContext);
 
-    async function submitSignIn(event) {
+    function submitSignIn(event) {
         event.preventDefault();
         setLoading(true);
         try
