@@ -59,3 +59,22 @@ export const ContainerMetadata = styled.div`
     margin-top: 1rem;
     cursor: pointer;
 `
+
+export const PostTop = styled.div`
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+    > div {
+        display: flex;
+        align-items: center;
+    }
+    > div > svg {
+        margin-left: 10px;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+    }
+`;
