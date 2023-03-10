@@ -17,25 +17,26 @@ const PostTimeline = (props) => {
 	const [description, setDescription] = useState(post.description);
 	const [liked, setLiked] = useState(post.liked_by_me);
 	const [numLikes, setNumLikes] = useState(Number(post.num_likes));
+	const [likes, setLikes] = useState(post.likes);
 	const [loading, setLoading] = useState(false);
 	const [tooltipContent, setTooltipContent] = useState(`você, ${post.likes[0]} e outras ${numLikes - 2} pessoas`);
 
 	const { config, update, setUpdate } = useContext(AuthContext);
 
 	useEffect(() => {
-		console.log(tooltipContent);
+		console.log(likes);
 		if (numLikes === 0) setTooltipContent(`Nenhuma curtida`)
 		else if (numLikes === 1)
 		{
 			if (liked) setTooltipContent('Você curtiu');
-			else setTooltipContent(`${post.likes[0].name} curtiu`);
+			else setTooltipContent(`${likes[0].name} curtiu`);
 		}
 		else
 		{
-			if(liked) setTooltipContent(`Você e ${post.likes[0].name} curtiu`);
-			else setTooltipContent(`${post.likes[0].name} e ${post.likes[1].name} curtiu`);
+			if(liked) setTooltipContent(`Você e ${likes[0].name} curtiu`);
+			else setTooltipContent(`${likes[0].name} e ${likes[1].name} curtiu`);
 		}
-	}, [liked, numLikes]);
+	}, [likes]);
 
 
 	const navigate = useNavigate();
@@ -85,13 +86,15 @@ const PostTimeline = (props) => {
 	const likePost = async () => {
 		setLiked(true);
 		setNumLikes(Number(numLikes) + 1);
-		await api.get(`/posts/likes/${post.id}`, config);
+		const likes = await api.get(`/posts/likes/${post.id}`, config);
+		setLikes(likes.data.likes);
 	}
-  
+
 	const dislikePost = async () => {
 		setLiked(false);
 		setNumLikes(Number(numLikes) - 1);
-		await api.delete(`/posts/likes/${post.id}`, config);
+		const likes = await api.delete(`/posts/likes/${post.id}`, config);
+		setLikes(likes.data.likes);
   }
 	function openUserPage(id) {
 		navigate(`/user/${id}`)
