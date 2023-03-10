@@ -10,25 +10,26 @@ export const ContainerPost = styled.div`
 	justify-content: space-between;
 `;
 export const ContainerImageProfile = styled.div`
-	@media (max-width: 710px) {
-		display: none;
-	}
-`;
+`
 export const ImageProfile = styled.img`
-	width: 50px;
-	height: 50px;
-	border-radius: 26.5px;
-	margin-top: 17px;
-	margin-left: 17px;
-	object-fit: cover;
-`;
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 26.5px;
+    margin-top: 17px;
+    margin-left: 17px;
+    object-fit: cover;
+`
 export const ContainerContent = styled.div`
-	width: 500px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	margin-right: 1rem;
-`;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 1rem;
+    @media (max-width: 710px){
+        width: 80%;
+        margin-right: 3rem;
+    }
+`
 export const UserName = styled.p`
 	width: 100%;
 	height: 23px;
@@ -50,16 +51,64 @@ export const Description = styled.p`
 	margin-top: 10px;
 `;
 export const ContainerMetadata = styled.div`
-	width: 100%;
-	height: 155px;
-	background: #171717;
-	border-radius: 11px;
-	border: 1px solid #c4c4c4;
-	margin-bottom: 20px;
-	margin-top: 1rem;
-	cursor: pointer;
-`;
-
+    width: 100%;
+    height: 155px;
+    background: #171717;
+    border-radius: 11px;
+    border: 1px solid #C4C4C4;
+    margin-bottom: 20px;
+    margin-top: 1rem;
+    cursor: pointer;
+    display: flex;
+`
+export const ContainerMetadataContent = styled.div`
+    width: 350px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`
+export const ImageMetadata = styled.img`
+    width: 150px;
+    height: 100%;
+    border-top-right-radius: 11px;
+    border-bottom-right-radius: 11px;
+`
+export const TitleMetadata = styled.p`
+    width: 300px;
+    height: 40px;
+    max-height: 40px;
+    overflow: hidden;
+    font-family: "Lato";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #CECECE;
+`
+export const DescriptionMetadata = styled.p`
+    width: 300px;
+    height: 40px;
+    max-height: 40px;
+    overflow: hidden;
+    font-family: "Lato";
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #9B9595;
+`
+export const LinkMetadata = styled.p`
+    width: 300px;
+    height: 40px;
+    max-height: 40px;
+    overflow: hidden;
+    font-family: "Lato";
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #CECECE;
+    margin-top: 0.5rem;
+`
 export const PostTop = styled.div`
 	width: 100%;
 	height: 50px;
@@ -78,7 +127,6 @@ export const PostTop = styled.div`
 		cursor: pointer;
 	}
 `;
-
 export const EditInput = styled.textarea`
 	width: 100%;
 	height: 45px;

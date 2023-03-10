@@ -1,15 +1,13 @@
 import { useState } from "react"
 import * as S from "./styles"
 import api from '../../config/api.js'
-import { useContext } from "react"
-import { AuthContext } from "../../contexts/authContext"
 
 const PostCreation = (props) => {
     const [link, setLink] = useState("")
     const [description, setDescription] = useState("")
     const [loading, setLoading] = useState(false)
-    const { config } = useContext(AuthContext)
-    const { imageUrl } = props
+    const { imageUrl, headers } = props
+
     const handleChange = (e) => {
         e.preventDefault()
         if (!link || !description){
@@ -22,7 +20,7 @@ const PostCreation = (props) => {
     const savePosts = async () => {
         try {
             setLoading(true)
-            const data = await api.post('/posts', {link, description}, config)
+            const data = await api.post('/posts', {link, description}, headers)
             if (data.status === 201){
                 setLoading(false)
                 setLink("")

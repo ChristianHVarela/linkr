@@ -103,9 +103,14 @@ const PostTimeline = (props) => {
 							</ReactTagify>
 						)}
 					</div>
-					<S.ContainerMetadata
-						onClick={handleClick}
-					></S.ContainerMetadata>
+					<S.ContainerMetadata onClick={handleClick}>
+						<S.ContainerMetadataContent>
+							<S.TitleMetadata>{post.title_metadata}</S.TitleMetadata>
+							<S.DescriptionMetadata>{post.description_metadata}</S.DescriptionMetadata>
+							<S.LinkMetadata>{post.link}</S.LinkMetadata>
+						</S.ContainerMetadataContent>
+						<S.ImageMetadata src={post.image_metadata} alt="/" />
+					</S.ContainerMetadata>
 				</S.ContainerContent>
 			</S.ContainerPost>
 			<DeleteModal

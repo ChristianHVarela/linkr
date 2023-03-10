@@ -7,6 +7,9 @@ export const Container = styled.div`
     background: transparent;
     align-items: center;
     margin-top: 30px;
+    @media (max-width: 710px){
+        width: 100%;
+    }
 `
 
 export const MessageEmpty = styled.p`
