@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { DesktopMenu, HeaderMenuContainer, Logout, MobileMenu } from "./styles";
 import { AuthContext } from "../../contexts/authContext";
 import DesktopSearchBar from "../DesktopSearchBox";
+import api from "../../config/api";
 
 export default function HeaderMenu() {
   const [showMenu, setShowMenu] = useState(false);

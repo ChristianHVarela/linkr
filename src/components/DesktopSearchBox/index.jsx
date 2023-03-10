@@ -17,6 +17,7 @@ export default function DesktopSearchBar(props) {
       try {
         const searchResult = await api.post("/user", searchText);
         setSearchResults(searchResult.data);
+        console.log(searchResult.data)
       } catch (error) {
         console.log(error);
       }
