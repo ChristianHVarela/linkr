@@ -22,6 +22,20 @@ export default function HeaderMenu() {
     }
   }, [token]);
 
+  async function searchingUser(e) {
+    setSearchQuery(e.target.value);
+    const searchText = { searchQuery: e.target.value };
+    console.log(searchText);
+    if (searchText.searchQuery.length >= 3) {
+      try {
+        const searchResult = await api.post("/user", searchText);
+        setSearchResults(searchResult.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
   function submitSearch(event) {
     event.preventDefault();
     console.log("ok");
