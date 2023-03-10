@@ -7,6 +7,7 @@ const Container = styled.div`
 	min-height: 400px;
 	background: #171717;
 	border-radius: 16px;
+	margin: 0 0 0 30px;
 	> h1 {
         font-family: 'Oswald', sans-serif;
 		font-weight: 700;

@@ -19,18 +19,20 @@ const MOCKDATA = [
 
 function Trending() {
 	const [trending, setTrending] = useState([]);
-	const { config } = useContext(AuthContext);
+	const { config, update } = useContext(AuthContext);
 	async function getTrending() {
 		try {
 			const { data } = await api.get("/trending", config);
 			setTrending(data);
+			console.log(data);
 		} catch (err) {
 			alert("Erro ao carregar os trending.");
 		}
 	}
 	useEffect(() => {
 		getTrending();
-	});
+	},[update]);
+
 	return (
 		<Container>
 			<h1>trending</h1>
@@ -38,8 +40,8 @@ function Trending() {
 			<HashList>
 				{trending.map((item) => (
 					<Hashtag key={item.id}>
-						<Link to={`/hashtag/${item.hashtag}`}>
-							#{item.hashtag}
+						<Link to={`/hashtag/${item.name}`}>
+							#{item.name}
 						</Link>
 					</Hashtag>
 				))}

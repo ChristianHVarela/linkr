@@ -14,7 +14,7 @@ const PostTimeline = (props) => {
 	const [description, setDescription] = useState(post.description);
 	const [loading, setLoading] = useState(false);
 
-	const { config } = useContext(AuthContext);
+	const { config, update, setUpdate } = useContext(AuthContext);
 
 	const navigate = useNavigate();
 	const handleClick = () => {
@@ -31,7 +31,8 @@ const PostTimeline = (props) => {
 			await api.put(`/posts/${post.id}`, { description }, config);
 			setEdit(false);
 			setLoading(false);
-			post.description = description; //temporario?
+			setUpdate(update + 1);
+			//post.description = description; //temporario?
 		} catch (error) {
 			console.log(error);
 			alert("An error occured while trying to edit the post");
@@ -57,7 +58,6 @@ const PostTimeline = (props) => {
 			textarea.setSelectionRange(value.length, value.length);
 		}
 	};
-	
 
 	return (
 		<>
