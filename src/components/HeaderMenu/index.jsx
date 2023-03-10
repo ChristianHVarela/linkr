@@ -4,13 +4,10 @@ import { useContext, useEffect, useState } from "react";
 import { DesktopMenu, HeaderMenuContainer, Logout, MobileMenu } from "./styles";
 import { AuthContext } from "../../contexts/authContext";
 import DesktopSearchBar from "../DesktopSearchBox";
-import api from "../../config/api";
 import { useNavigate } from "react-router";
-import { DesktopSearchBox, SearchResult } from "../DesktopSearchBox/styles";
-import { DebounceInput } from "react-debounce-input";
-import { RxMagnifyingGlass } from "react-icons/rx";
 
 export default function HeaderMenu() {
+
   const [showMenu, setShowMenu] = useState(false);
 
   const [showLogout, setShowLogout] = useState(false);
@@ -26,44 +23,22 @@ export default function HeaderMenu() {
   useEffect(() => {
     if (token !== "") {
       setShowMenu(true);
-    }
-    else
-    {
+    } else {
       setShowMenu(false);
     }
   }, [token]);
 
-
   function logoutButton() {
     const closeLogout = (e) => {
-      if (e.target.parentNode.classList[0] !== 'profile') setShowLogout(false);
-      document.body.removeEventListener('mouseup', closeLogout);
+      if (e.target.parentNode.classList[0] !== "profile") setShowLogout(false);
+      document.body.removeEventListener("mouseup", closeLogout);
     };
 
-    if (showLogout)
-    {
+    if (showLogout) {
       setShowLogout(false);
-    }
-    else
-    {
+    } else {
       setShowLogout(true);
-      document.body.addEventListener('mouseup', closeLogout);
-    }
-  }
-
-
-
-  async function searchingUser(e) {
-    setSearchQuery(e.target.value);
-    const searchText = { searchQuery: e.target.value };
-    console.log(searchText);
-    if (searchText.searchQuery.length >= 3) {
-      try {
-        const searchResult = await api.post("/user", searchText);
-        setSearchResults(searchResult.data);
-      } catch (error) {
-        console.log(error);
-      }
+      document.body.addEventListener("mouseup", closeLogout);
     }
   }
 
@@ -74,10 +49,9 @@ export default function HeaderMenu() {
 
   function logout() {
     localStorage.clear();
-    setImage('');
-    setToken('')
-
-    navigate('/')
+    setImage("");
+    setToken("");
+    navigate("/");
   }
 
   return (
@@ -86,8 +60,12 @@ export default function HeaderMenu() {
         <DesktopMenu showLogout={showLogout} onSubmit={submitSearch}>
           <h1>linkr</h1>
 
-          <DesktopSearchBar 
-          searchResults={searchResults} searchQuery={searchQuery} setSearchResults={setSearchResults} setSearchQuery={setSearchQuery}
+          <DesktopSearchBar
+            searchResults={searchResults}
+            searchQuery={searchQuery}
+            setSearchResults={setSearchResults}
+            setSearchQuery={setSearchQuery}
+
           />
 
           <div className="profile" onClick={logoutButton}>
@@ -99,7 +77,13 @@ export default function HeaderMenu() {
 
         <MobileMenu>
           <div>
-            <h1>LINKR</h1>
+            <h1>linkr</h1>
+            <DesktopSearchBar
+              searchResults={searchResults}
+              searchQuery={searchQuery}
+              setSearchResults={setSearchResults}
+              setSearchQuery={setSearchQuery}
+            />
             <div className="profile" onClick={logoutButton}>
               <MdOutlineKeyboardArrowDown className="arrowDown" />
               <MdKeyboardArrowUp className="arrowUp" />
@@ -107,16 +91,6 @@ export default function HeaderMenu() {
             </div>
           </div>
         </MobileMenu>
-        {/*
-        <MobileSearchBox>
-          teste
-          <div className="search-box">
-            <input type="text" placeholder="Search for people" />
-            <button type="submit">
-              <RxMagnifyingGlass />
-            </button>
-          </div>
-        </MobileSearchBox> */}
       </HeaderMenuContainer>
 
       <Logout showLogout={showLogout}>

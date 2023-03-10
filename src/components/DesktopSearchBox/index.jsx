@@ -3,9 +3,13 @@ import { DebounceInput } from "react-debounce-input";
 import { DesktopSearchBox, SearchResult } from "./styles";
 import { useNavigate } from "react-router-dom";
 import api from "../../config/api";
+import { AuthContext } from "../../contexts/authContext";
+import { useContext } from "react";
 
 export default function DesktopSearchBar(props) {
     const { searchResults, searchQuery, setSearchResults, setSearchQuery } = props
+
+    const { config } = useContext(AuthContext)
 
   const navigate = useNavigate();
 
@@ -15,7 +19,7 @@ export default function DesktopSearchBar(props) {
     console.log(searchText);
     if (searchText.searchQuery.length >= 3) {
       try {
-        const searchResult = await api.post("/user", searchText);
+        const searchResult = await api.post("/user", searchText, config);
         setSearchResults(searchResult.data);
         console.log(searchResult.data)
       } catch (error) {

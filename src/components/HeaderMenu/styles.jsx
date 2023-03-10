@@ -94,24 +94,12 @@ export const MobileMenu = styled.div`
       /* width: 438.5px; */
     }
 
-    input {
-      width: 563px;
-      height: 45px;
-      left: 437px;
-      top: 13px;
-      background: #ffffff;
-      border-radius: 8px;
-      border-style: none;
-      padding: 9px 14px;
-      box-sizing: border-box;
-    }
 
     div.profile {
       width: 131px;
       display: flex;
       justify-content: flex-end;
       align-items: center;
-
       font-size: 30px;
       color: white;
 
