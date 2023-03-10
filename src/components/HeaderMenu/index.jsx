@@ -73,10 +73,10 @@ export default function HeaderMenu() {
           <div className="profile" onClick={logoutButton}>
             <MdOutlineKeyboardArrowDown className="arrowDown" />
             <MdKeyboardArrowUp className="arrowUp" />
-            <img src={image} alt="" />
+            <img data-test="avatar" src={image} alt="" />
             <Logout showLogout={showLogout}>
-              <div onClick={logout} className="logout">
-                <h3>Logout</h3>
+              <div data-test="menu" onClick={logout} className="logout">
+                <h3 data-test="logout" >Logout</h3>
               </div>
             </Logout>
           </div>

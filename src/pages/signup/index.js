@@ -36,11 +36,11 @@ export default function Signup() {
         <HomeStyle>
             <HomeLogo />
             <FormContainer onSubmit={submitSignUp}>
-                <input placeholder="email" type='email' value={email} onChange={ (e) => setEmail(e.target.value) } />
-                <input placeholder="password" type='password'  value={password} onChange={ (e) => setPassword(e.target.value) } />
-                <input placeholder="username" type='text'  value={name} onChange={ (e) => setName(e.target.value) } />
-                <input placeholder="picture url" type='text'  value={image} onChange={ (e) => setImage(e.target.value) } />
-                <button type='submit' disabled={loading} >
+                <input placeholder="email" data-test="email" type='email' value={email} onChange={ (e) => setEmail(e.target.value) } />
+                <input placeholder="password" data-test="password" type='password'  value={password} onChange={ (e) => setPassword(e.target.value) } />
+                <input placeholder="username" data-test="username" type='text'  value={name} onChange={ (e) => setName(e.target.value) } />
+                <input placeholder="picture url" data-test="picture-url" type='text'  value={image} onChange={ (e) => setImage(e.target.value) } />
+                <button type='submit' disabled={loading} data-test="sing-up-btn">
                     {
                         loading ? <ThreeDots
                         height="80"
@@ -55,7 +55,7 @@ export default function Signup() {
                             <>Sign Up</>
                     }
                 </button>
-                <Link to={'/'}>Switch back to log in</Link>
+                <Link data-test="login-link" to={'/'}>Switch back to log in</Link>
             </FormContainer>
         </HomeStyle>
     );
