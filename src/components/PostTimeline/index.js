@@ -101,8 +101,8 @@ const PostTimeline = (props) => {
 	return (
 		<>
 			<S.ContainerPost>
-				<S.ContainerImageProfile onClick={() => openUserPage(post.user_id)}>
-					<S.ImageProfile src={post.image_profile} alt="" />
+				<S.ContainerImageProfile>
+					<S.ImageProfile onClick={() => openUserPage(post.user_id)} src={post.image_profile} alt="" />
 					{
 						liked ?
 							<IoHeart onClick={dislikePost} color='red' /> :
