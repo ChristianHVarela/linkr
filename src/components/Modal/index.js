@@ -65,11 +65,12 @@ const modalStyle = {
 		marginRight: "-50%",
 		transform: "translate(-50%, -50%)",
 		backgroundColor: "#333333",
-		borderRadius: "50px 130px",
+		borderRadius: "50px",
 		padding: "40px",
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
+		width: "597px"
 	},
 };
 
