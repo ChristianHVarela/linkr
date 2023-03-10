@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import PostCreation from "../../components/PostCreation"
 import Timeline from "../../components/Timeline"
+import Trending from "../../components/Trending"
 import api from "../../config/api"
 import { AuthContext } from "../../contexts/authContext"
 import * as S from "./styles"
@@ -28,9 +29,12 @@ const Posts = () => {
 
     return (
         <S.Container>
-            <S.Title>timeline</S.Title>
-            <PostCreation imageUrl={image} headers={config} />
-            <Timeline posts={posts} />
+            <S.ContainerCenter>
+                <S.Title>timeline</S.Title>
+                <PostCreation imageUrl={image} headers={config} />
+                <Timeline posts={posts} />
+            </S.ContainerCenter>
+            <Trending />
         </S.Container>
     )
 }
