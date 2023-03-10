@@ -42,7 +42,7 @@ export const UserName = styled.p`
   margin-top: 20px;
 
   :hover {
-    cursor: pointer;
+    cursor: pointer; 
   }
 `;
 export const Description = styled.p`
