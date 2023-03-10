@@ -7,6 +7,8 @@ import DeleteModal from "../Modal";
 import api from "../../config/api";
 import { AuthContext } from "../../contexts/authContext";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const PostTimeline = (props) => {
 	const { post } = props;
@@ -16,6 +18,7 @@ const PostTimeline = (props) => {
 	const [liked, setLiked] = useState(post.liked);
 	const [numLikes, setNumLikes] = useState(post.num_likes);
 	const [loading, setLoading] = useState(false);
+	const [tooltipContent, setTooltipContent] = useState(`você, joão e outras ${numLikes - 2} pessoas`);
 
 	const { config, update, setUpdate } = useContext(AuthContext);
 
@@ -63,16 +66,14 @@ const PostTimeline = (props) => {
 	};
 
 	const likePost = async () => {
-		console.log(config);
-		await api.get(`/posts/likes/${post.id}`, config);
-		setNumLikes(numLikes + 1);
 		setLiked(true);
+		setNumLikes(numLikes + 1);
+		await api.get(`/posts/likes/${post.id}`, config);
 	}
 	const dislikePost = async () => {
-		console.log(config);
-		await api.delete(`/posts/likes/${post.id}`, config);
-		setNumLikes(numLikes - 1);
 		setLiked(false);
+		setNumLikes(numLikes - 1);
+		await api.delete(`/posts/likes/${post.id}`, config);
 	}
 
 	return (
@@ -85,6 +86,8 @@ const PostTimeline = (props) => {
 							<IoHeart onClick={dislikePost} color='red' /> :
 							<IoHeartOutline onClick={likePost} color='white' />
 					}
+					<p className="numLikes">{numLikes} likes</p>
+					<Tooltip anchorSelect=".numLikes" content={`você, joão e outras 3 pessoas`} place="bottom" className="tooltip"></Tooltip>
 				</S.ContainerImageProfile>
 				<S.ContainerContent>
 					<S.PostTop>

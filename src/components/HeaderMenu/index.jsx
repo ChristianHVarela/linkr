@@ -114,9 +114,13 @@ export default function HeaderMenu() {
             <MdOutlineKeyboardArrowDown className="arrowDown" />
             <MdKeyboardArrowUp className="arrowUp" />
             <img src={image} alt="" />
+            <Logout showLogout={showLogout}>
+              <div onClick={logout} className="logout">
+                <h3>Logout</h3>
+              </div>
+            </Logout>
           </div>
         </DesktopMenu>
-
         <MobileMenu>
           <div>
             <h1>LINKR</h1>
@@ -139,11 +143,7 @@ export default function HeaderMenu() {
         </MobileSearchBox> */}
       </HeaderMenuContainer>
 
-      <Logout showLogout={showLogout}>
-        <div onClick={logout} className="logout">
-          <h3>Logout</h3>
-        </div>
-      </Logout>
+
     </>
   );
 }

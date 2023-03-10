@@ -17,7 +17,27 @@ export const ContainerImageProfile = styled.div`
     padding-right: 0px;
 
     svg{
+        width: 20px;
+        height: 20px;
         margin-top: 20px;
+        margin-bottom: 5px;
+    }
+
+    p{
+        width: 100%;
+        font-family: 'lato';
+        color: white;
+        font-size: 11px;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    .tooltip{
+        background-color: rgba(255,255,255,.9);
+        color: #505050;
+        font-family: 'lato';
+        font-size: 11px;
+        font-weight: 700;
     }
 `
 export const ImageProfile = styled.img`
