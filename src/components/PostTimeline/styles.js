@@ -10,10 +10,37 @@ export const ContainerPost = styled.div`
   justify-content: space-between;
 `;
 export const ContainerImageProfile = styled.div`
-  :hover {
-    cursor: pointer;
-  }
-`;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 17px;
+    padding-right: 0px;
+
+    svg{
+        width: 20px;
+        height: 20px;
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+
+    p{
+        width: 100%;
+        font-family: 'lato';
+        color: white;
+        font-size: 11px;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    .tooltip{
+        background-color: rgba(255,255,255,.9);
+        color: #505050;
+        font-family: 'lato';
+        font-size: 11px;
+        font-weight: 700;
+    }
+`
 export const ImageProfile = styled.img`
   width: 50px;
   height: 50px;
@@ -21,6 +48,7 @@ export const ImageProfile = styled.img`
   margin-top: 17px;
   margin-left: 17px;
 `;
+
 export const ContainerContent = styled.div`
   width: 500px;
   display: flex;

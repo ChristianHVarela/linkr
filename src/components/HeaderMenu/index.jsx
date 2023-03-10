@@ -1,14 +1,10 @@
 import { MdOutlineKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { useContext, useEffect, useState } from "react";
-
 import { DesktopMenu, HeaderMenuContainer, Logout, MobileMenu } from "./styles";
 import { AuthContext } from "../../contexts/authContext";
 import DesktopSearchBar from "../DesktopSearchBox";
-import api from "../../config/api";
 import { useNavigate } from "react-router";
-import { DesktopSearchBox, SearchResult } from "../DesktopSearchBox/styles";
-import { DebounceInput } from "react-debounce-input";
-import { RxMagnifyingGlass } from "react-icons/rx";
+
 
 export default function HeaderMenu() {
   const [showMenu, setShowMenu] = useState(false);
@@ -51,22 +47,6 @@ export default function HeaderMenu() {
     }
   }
 
-
-
-  async function searchingUser(e) {
-    setSearchQuery(e.target.value);
-    const searchText = { searchQuery: e.target.value };
-    console.log(searchText);
-    if (searchText.searchQuery.length >= 3) {
-      try {
-        const searchResult = await api.post("/user", searchText);
-        setSearchResults(searchResult.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }
-
   function submitSearch(event) {
     event.preventDefault();
     console.log("ok");
@@ -86,7 +66,7 @@ export default function HeaderMenu() {
         <DesktopMenu showLogout={showLogout} onSubmit={submitSearch}>
           <h1>linkr</h1>
 
-          <DesktopSearchBar 
+          <DesktopSearchBar
           searchResults={searchResults} searchQuery={searchQuery} setSearchResults={setSearchResults} setSearchQuery={setSearchQuery}
           />
 
@@ -94,9 +74,13 @@ export default function HeaderMenu() {
             <MdOutlineKeyboardArrowDown className="arrowDown" />
             <MdKeyboardArrowUp className="arrowUp" />
             <img src={image} alt="" />
+            <Logout showLogout={showLogout}>
+              <div onClick={logout} className="logout">
+                <h3>Logout</h3>
+              </div>
+            </Logout>
           </div>
         </DesktopMenu>
-
         <MobileMenu>
           <div>
             <h1>LINKR</h1>
@@ -119,11 +103,7 @@ export default function HeaderMenu() {
         </MobileSearchBox> */}
       </HeaderMenuContainer>
 
-      <Logout showLogout={showLogout}>
-        <div onClick={logout} className="logout">
-          <h3>Logout</h3>
-        </div>
-      </Logout>
+
     </>
   );
 }
