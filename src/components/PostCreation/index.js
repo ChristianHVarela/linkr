@@ -6,7 +6,7 @@ const PostCreation = (props) => {
     const [link, setLink] = useState("")
     const [description, setDescription] = useState("")
     const [loading, setLoading] = useState(false)
-    const { imageUrl } = props
+    const { imageUrl, headers } = props
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -20,7 +20,7 @@ const PostCreation = (props) => {
     const savePosts = async () => {
         try {
             setLoading(true)
-            const data = await api.post('/posts', {link, description})
+            const data = await api.post('/posts', {link, description}, headers)
             if (data.status === 201){
                 setLoading(false)
                 setLink("")

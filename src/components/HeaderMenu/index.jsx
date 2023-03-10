@@ -5,6 +5,7 @@ import { DesktopMenu, HeaderMenuContainer, Logout, MobileMenu } from "./styles";
 import { AuthContext } from "../../contexts/authContext";
 import DesktopSearchBar from "../DesktopSearchBox";
 import api from "../../config/api";
+import { useNavigate } from "react-router";
 
 export default function HeaderMenu() {
   const [showMenu, setShowMenu] = useState(false);
@@ -15,13 +16,39 @@ export default function HeaderMenu() {
 
   const [searchResults, setSearchResults] = useState([]);
 
-  const { token, image } = useContext(AuthContext);
+  const { token, setToken, image, setImage } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token !== "") {
       setShowMenu(true);
     }
+    else
+    {
+      setShowMenu(false);
+    }
   }, [token]);
+
+
+  function logoutButton() {
+    const closeLogout = (e) => {
+      if (e.target.parentNode.classList[0] !== 'profile') setShowLogout(false);
+      document.body.removeEventListener('mouseup', closeLogout);
+    };
+
+    if (showLogout)
+    {
+      setShowLogout(false);
+    }
+    else
+    {
+      setShowLogout(true);
+      document.body.addEventListener('mouseup', closeLogout);
+    }
+  }
+
+
 
   async function searchingUser(e) {
     setSearchQuery(e.target.value);
@@ -42,20 +69,41 @@ export default function HeaderMenu() {
     console.log("ok");
   }
 
+  function logout() {
+    localStorage.clear();
+    setImage('');
+    setToken('');
+
+    navigate('/');
+  }
+
   return (
     <>
       <HeaderMenuContainer showMenu={showMenu}>
         <DesktopMenu showLogout={showLogout} onSubmit={submitSearch}>
           <h1>linkr</h1>
-
-          <DesktopSearchBar
-            searchResults={searchResults}
-            searchQuery={searchQuery}
-            setSearchResults={setSearchResults}
-            setSearchQuery={setSearchQuery}
-          />
-
-          <div className="profile" onClick={() => setShowLogout(!showLogout)}>
+          <DesktopSearchBox searchQuery={searchQuery}>
+            <DebounceInput
+              debounceTimeout={300}
+              forceNotifyByEnter={true}
+              type="text"
+              placeholder="Search for people"
+              value={searchQuery}
+              onChange={(e) => searchingUser(e)}
+            />
+            <button type="submit">
+              <RxMagnifyingGlass />
+            </button>
+            <SearchResult searchQuery={searchQuery}>
+              {searchResults.map((m) => (
+                <div key={m.id}>
+                  <img src={m.image} alt="" />
+                  <p>{m.name}</p>
+                </div>
+              ))}
+            </SearchResult>
+          </DesktopSearchBox>
+          <div className="profile" onClick={logoutButton}>
             <MdOutlineKeyboardArrowDown className="arrowDown" />
             <MdKeyboardArrowUp className="arrowUp" />
             <img src={image} alt="" />
@@ -65,14 +113,14 @@ export default function HeaderMenu() {
         <MobileMenu>
           <div>
             <h1>LINKR</h1>
-            <div className="profile" onClick={() => setShowLogout(!showLogout)}>
+            <div className="profile" onClick={logoutButton}>
               <MdOutlineKeyboardArrowDown className="arrowDown" />
               <MdKeyboardArrowUp className="arrowUp" />
               <img src={image} alt="" />
             </div>
           </div>
         </MobileMenu>
-        {/* 
+        {/*
         <MobileSearchBox>
           teste
           <div className="search-box">
@@ -85,7 +133,7 @@ export default function HeaderMenu() {
       </HeaderMenuContainer>
 
       <Logout showLogout={showLogout}>
-        <div>
+        <div onClick={logout} className="logout">
           <h3>Logout</h3>
         </div>
       </Logout>
