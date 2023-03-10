@@ -11,12 +11,12 @@ export const ContainerPost = styled.div`
 `
 export const ContainerImageProfile = styled.div`
     @media (max-width: 710px){
-        display: none;
+        
     }
 `
 export const ImageProfile = styled.img`
-    width: 50px;
-    height: 50px;
+    max-width: 50px;
+    max-height: 50px;
     border-radius: 26.5px;
     margin-top: 17px;
     margin-left: 17px;
@@ -27,6 +27,10 @@ export const ContainerContent = styled.div`
     flex-direction: column;
     justify-content: space-between;
     margin-right: 1rem;
+    @media (max-width: 710px){
+        width: 80%;
+        margin-right: 3rem;
+    }
 `
 export const UserName = styled.p`
     width: 100%;
@@ -57,4 +61,53 @@ export const ContainerMetadata = styled.div`
     margin-bottom: 20px;
     margin-top: 1rem;
     cursor: pointer;
+    display: flex;
+`
+export const ContainerMetadataContent = styled.div`
+    width: 350px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`
+export const ImageMetadata = styled.img`
+    width: 150px;
+    height: 100%;
+    border-top-right-radius: 11px;
+    border-bottom-right-radius: 11px;
+`
+export const TitleMetadata = styled.p`
+    width: 300px;
+    height: 40px;
+    max-height: 40px;
+    overflow: hidden;
+    font-family: "Lato";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #CECECE;
+`
+export const DescriptionMetadata = styled.p`
+    width: 300px;
+    height: 40px;
+    max-height: 40px;
+    overflow: hidden;
+    font-family: "Lato";
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #9B9595;
+`
+export const LinkMetadata = styled.p`
+    width: 300px;
+    height: 40px;
+    max-height: 40px;
+    overflow: hidden;
+    font-family: "Lato";
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #CECECE;
+    margin-top: 0.5rem;
 `
