@@ -106,19 +106,20 @@ const PostTimeline = (props) => {
 					<S.ImageProfile onClick={() => openUserPage(post.user_id)} src={post.image_profile} alt="" />
 					{
 						liked ?
-							<IoHeart onClick={dislikePost} color='red' /> :
-							<IoHeartOutline onClick={likePost} color='white' />
+							<IoHeart data-test="like-btn" onClick={dislikePost} color='red' /> :
+							<IoHeartOutline data-test="like-btn" onClick={likePost} color='white' />
 					}
-					<p data-tooltip-id={`${post.id}`} className={`numLikes`}>{numLikes} likes</p>
-					<Tooltip id={`${post.id}`} content={tooltipContent} place="bottom" className="tooltip"></Tooltip>
+					<p data-test="counter" data-tooltip-id={`${post.id}`} className={`numLikes`}>{numLikes} likes</p>
+					<Tooltip id={`${post.id}`} content={tooltipContent} place="bottom" data-test="tooltip" className="tooltip"></Tooltip>
 				</S.ContainerImageProfile>
 				<S.ContainerContent>
 					<S.PostTop>
 						<S.UserName data-test="username" onClick={() => openUserPage(post.user_id)}>{post.user_name}</S.UserName>
 						{post.author_match && (
 							<div>
-								<FaPencilAlt onClick={handleEdit} />
+								<FaPencilAlt onClick={handleEdit} data-test="edit-btn"/>
 								<FaTrashAlt
+									data-test="delete-btn"
 									onClick={() => setModalIsOpen(true)}
 								/>
 							</div>
@@ -127,6 +128,7 @@ const PostTimeline = (props) => {
 					<div>
 						{edit ? (
 							<S.EditInput
+								data-test="edit-input"
 								value={description}
 								onChange={(e) => setDescription(e.target.value)}
 								ref={handleFocus}
