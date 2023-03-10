@@ -7,16 +7,20 @@ import * as S from "./styles";
 
 const UserPage = () => {
   const { id } = useParams();
+  const { config } = useContext(AuthContext)
 
   const [userPosts, setUserPosts] = useState(null);
-  const { config } = useContext(AuthContext);
+
+
   useEffect(() => {
     getUserPosts();
   }, [id]);
 
   const getUserPosts = async () => {
     try {
-      const { data } = await api.get(`/user/${id}`, config);
+
+      const { data } = await api.get(`/user/${id}`, config );
+
       setUserPosts(data);
     } catch (error) {
       console.log(error);
