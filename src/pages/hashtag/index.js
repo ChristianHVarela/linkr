@@ -30,7 +30,7 @@ const HashtagPosts = () => {
 
     return (
         <S.Container>
-            <S.Title>#{hashtag}</S.Title>
+            <S.Title data-test="hashtag-title">#{hashtag}</S.Title>
             <Timeline posts={posts} />
         </S.Container>
     )

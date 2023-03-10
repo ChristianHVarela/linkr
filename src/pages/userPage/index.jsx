@@ -10,16 +10,12 @@ const UserPage = () => {
 
   const [userPosts, setUserPosts] = useState(null);
   const { config } = useContext(AuthContext);
-
-  console.log(userPosts);
-
   useEffect(() => {
     getUserPosts();
   }, [id]);
 
   const getUserPosts = async () => {
     try {
-      console.log(id);
       const { data } = await api.get(`/user/${id}`, config);
       setUserPosts(data);
     } catch (error) {

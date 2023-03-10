@@ -22,9 +22,11 @@ const PostTimeline = (props) => {
 	const [tooltipContent, setTooltipContent] = useState(`você, ${post.likes[0]} e outras ${numLikes - 2} pessoas`);
 
 	const { config, update, setUpdate } = useContext(AuthContext);
-
 	useEffect(() => {
+<<<<<<< HEAD
 		console.log(likes);
+=======
+>>>>>>> fe330002314c23c970715a59988943f46f2ab965
 		if (numLikes === 0) setTooltipContent(`Nenhuma curtida`)
 		else if (numLikes === 1)
 		{
@@ -103,7 +105,7 @@ const PostTimeline = (props) => {
 
 	return (
 		<>
-			<S.ContainerPost>
+			<S.ContainerPost data-test="post">
 				<S.ContainerImageProfile>
 					<S.ImageProfile onClick={() => openUserPage(post.user_id)} src={post.image_profile} alt="" />
 					{
@@ -116,7 +118,7 @@ const PostTimeline = (props) => {
 				</S.ContainerImageProfile>
 				<S.ContainerContent>
 					<S.PostTop>
-						<S.UserName onClick={() => openUserPage(post.user_id)}>{post.user_name}</S.UserName>
+						<S.UserName data-test="username" onClick={() => openUserPage(post.user_id)}>{post.user_name}</S.UserName>
 						{post.author_match && (
 							<div>
 								<FaPencilAlt onClick={handleEdit} />
@@ -146,13 +148,13 @@ const PostTimeline = (props) => {
 									navigate("/hashtag/" + tag.slice(1))
 								}
 							>
-								<S.Description>
+								<S.Description data-test="description">
 									{post.description}
 								</S.Description>
 							</ReactTagify>
 						)}
 					</div>
-					<S.ContainerMetadata onClick={handleClick}>
+					<S.ContainerMetadata data-test="link" onClick={handleClick}>
 						<S.ContainerMetadataContent>
 							<S.TitleMetadata>{post.title_metadata}</S.TitleMetadata>
 							<S.DescriptionMetadata>{post.description_metadata}</S.DescriptionMetadata>

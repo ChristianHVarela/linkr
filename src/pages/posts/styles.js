@@ -5,11 +5,15 @@ export const Container = styled.div`
     min-height: 100vh;
     height: 100%;
     background: #333333;
+    margin-top: 72px;
+    display: flex;
+    justify-content: center;
+`
+export const ContainerCenter = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 72px;
 `
 export const Title = styled.p`
     font-family: "Oswald";

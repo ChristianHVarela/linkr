@@ -17,7 +17,7 @@ const Timeline = (props) => {
                 wrapperStyle={{}}
                 wrapperClassName=""
                 visible={true}
-                /> : posts.length === 0 ? <S.MessageEmpty>There are no posts yet</S.MessageEmpty> : posts.map((item) => {return <PostTimeline key={item.id} post={item} />})
+                /> : posts.length === 0 ? <S.MessageEmpty data-test="message">There are no posts yet</S.MessageEmpty> : posts.map((item) => {return <PostTimeline key={item.id} post={item} />})
             }
         </S.Container>
     )
