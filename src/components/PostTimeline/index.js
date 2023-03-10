@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { ReactTagify } from "react-tagify";
 import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
 import * as S from "./styles";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DeleteModal from "../Modal";
 import api from "../../config/api";
 import { AuthContext } from "../../contexts/authContext";
@@ -15,12 +15,28 @@ const PostTimeline = (props) => {
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [edit, setEdit] = useState(false);
 	const [description, setDescription] = useState(post.description);
-	const [liked, setLiked] = useState(post.liked);
-	const [numLikes, setNumLikes] = useState(post.num_likes);
+	const [liked, setLiked] = useState(post.liked_by_me);
+	const [numLikes, setNumLikes] = useState(Number(post.num_likes));
 	const [loading, setLoading] = useState(false);
-	const [tooltipContent, setTooltipContent] = useState(`você, joão e outras ${numLikes - 2} pessoas`);
+	const [tooltipContent, setTooltipContent] = useState(`você, ${post.likes[0]} e outras ${numLikes - 2} pessoas`);
 
 	const { config, update, setUpdate } = useContext(AuthContext);
+
+	useEffect(() => {
+		console.log(tooltipContent);
+		if (numLikes === 0) setTooltipContent(`Nenhuma curtida`)
+		else if (numLikes === 1)
+		{
+			if (liked) setTooltipContent('Você curtiu');
+			else setTooltipContent(`${post.likes[0].name} curtiu`);
+		}
+		else
+		{
+			if(liked) setTooltipContent(`Você e ${post.likes[0].name} curtiu`);
+			else setTooltipContent(`${post.likes[0].name} e ${post.likes[1].name} curtiu`);
+		}
+	}, [liked, numLikes]);
+
 
 	const navigate = useNavigate();
 	const handleClick = () => {
@@ -67,12 +83,12 @@ const PostTimeline = (props) => {
 
 	const likePost = async () => {
 		setLiked(true);
-		setNumLikes(numLikes + 1);
+		setNumLikes(Number(numLikes) + 1);
 		await api.get(`/posts/likes/${post.id}`, config);
 	}
 	const dislikePost = async () => {
 		setLiked(false);
-		setNumLikes(numLikes - 1);
+		setNumLikes(Number(numLikes) - 1);
 		await api.delete(`/posts/likes/${post.id}`, config);
 	}
 
@@ -86,8 +102,8 @@ const PostTimeline = (props) => {
 							<IoHeart onClick={dislikePost} color='red' /> :
 							<IoHeartOutline onClick={likePost} color='white' />
 					}
-					<p className="numLikes">{numLikes} likes</p>
-					<Tooltip anchorSelect=".numLikes" content={`você, joão e outras 3 pessoas`} place="bottom" className="tooltip"></Tooltip>
+					<p data-tooltip-id={`${post.id}`} className={`numLikes`}>{numLikes} likes</p>
+					<Tooltip id={`${post.id}`} content={tooltipContent} place="bottom" className="tooltip"></Tooltip>
 				</S.ContainerImageProfile>
 				<S.ContainerContent>
 					<S.PostTop>
