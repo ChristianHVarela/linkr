@@ -1,28 +1,58 @@
-import * as S from "./styles"
+import { useNavigate } from "react-router-dom";
+import { ReactTagify } from "react-tagify";
+import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
+import * as S from "./styles";
+import { useState } from "react";
+import DeleteModal from "../Modal";
 
 const PostTimeline = (props) => {
-    const { post } = props
+	const [modalIsOpen, setModalIsOpen] = useState(false);
+	const { post } = props;
+	const navigate = useNavigate();
+	const handleClick = () => {
+		window.open(post.link, "_blank");
+	};
 
-    const handleClick = () => {
-        window.open(post.link, "_blank");
-      }
+	return (
+		<>
+			<S.ContainerPost>
+				<S.ContainerImageProfile>
+					<S.ImageProfile src={post.image_profile} alt="" />
+				</S.ContainerImageProfile>
+				<S.ContainerContent>
+					<S.PostTop>
+						<S.UserName>{post.user_name}</S.UserName>
+						{post.author_match && (
+							<div>
+								<FaPencilAlt />
+								<FaTrashAlt
+									onClick={() => setModalIsOpen(true)}
+								/>
+							</div>
+						)}
+					</S.PostTop>
+					<div>
+						<ReactTagify
+							tagStyle={{ fontWeight: "bold", cursor: "pointer" }}
+							tagClicked={(tag) =>
+								navigate("/hashtag/" + tag.slice(1))
+							}
+						>
+							<S.Description>{post.description}</S.Description>
+						</ReactTagify>
+					</div>
+					<S.ContainerMetadata
+						onClick={handleClick}
+					></S.ContainerMetadata>
+				</S.ContainerContent>
+			</S.ContainerPost>
+			<DeleteModal
+				id={post.id}
+				modalIsOpen={modalIsOpen}
+				setModalIsOpen={setModalIsOpen}
+			/>
+		</>
+	);
+};
 
-    return (
-        <S.ContainerPost onClick={handleClick}>
-            <S.ContainerImageProfile>
-                <S.ImageProfile src={post.image_profile} alt="" />
-            </S.ContainerImageProfile>
-            <S.ContainerContent>
-                <div>
-                    <S.UserName>{post.user_name}</S.UserName>
-                    <S.Description>{post.description}</S.Description>
-                </div>
-                <S.ContainerMetadata>
-
-                </S.ContainerMetadata>
-            </S.ContainerContent>
-        </S.ContainerPost>
-    )
-}
-
-export default PostTimeline
+export default PostTimeline;
