@@ -81,21 +81,27 @@ const PostTimeline = (props) => {
 		}
 	};
 
+
 	const likePost = async () => {
 		setLiked(true);
 		setNumLikes(Number(numLikes) + 1);
 		await api.get(`/posts/likes/${post.id}`, config);
 	}
+  
 	const dislikePost = async () => {
 		setLiked(false);
 		setNumLikes(Number(numLikes) - 1);
 		await api.delete(`/posts/likes/${post.id}`, config);
+  }
+	function openUserPage(id) {
+		navigate(`/user/${id}`)
+
 	}
 
 	return (
 		<>
 			<S.ContainerPost>
-				<S.ContainerImageProfile>
+				<S.ContainerImageProfile onClick={() => openUserPage(post.user_id)}>
 					<S.ImageProfile src={post.image_profile} alt="" />
 					{
 						liked ?
@@ -107,7 +113,7 @@ const PostTimeline = (props) => {
 				</S.ContainerImageProfile>
 				<S.ContainerContent>
 					<S.PostTop>
-						<S.UserName>{post.user_name}</S.UserName>
+						<S.UserName onClick={() => openUserPage(post.user_id)}>{post.user_name}</S.UserName>
 						{post.author_match && (
 							<div>
 								<FaPencilAlt onClick={handleEdit} />
