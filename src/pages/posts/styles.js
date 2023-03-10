@@ -9,6 +9,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 72px;
 `
 export const Title = styled.p`
     font-family: "Oswald";
@@ -19,6 +20,7 @@ export const Title = styled.p`
     width: 610px;
     text-align: left;
     margin-bottom: 40px;
+    margin-top: 1rem;
     @media (max-width: 710px){
         width: 100vw;
         margin-left: 1.5rem;

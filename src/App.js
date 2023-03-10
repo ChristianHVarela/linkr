@@ -8,8 +8,9 @@ import Signup from './pages/signup/index';
 function App() {
   return (
     <AuthProvider>
-      <HeaderMenu />
+
       <BrowserRouter>
+        <HeaderMenu />
         <Routes>
           <Route path='/' element={ <Signin /> } />
           <Route path='/signup' element={ <Signup />} />

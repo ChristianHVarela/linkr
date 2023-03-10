@@ -12,6 +12,7 @@ import {
 } from "./styles";
 import { AuthContext } from "../../contexts/authContext";
 import api from "../../config/api";
+import { useNavigate } from "react-router";
 
 export default function HeaderMenu() {
   const [showMenu, setShowMenu] = useState(false);
@@ -22,13 +23,39 @@ export default function HeaderMenu() {
 
   const [searchResults, setSearchResults] = useState([]);
 
-  const { token, image } = useContext(AuthContext);
+  const { token, setToken, image, setImage } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token !== "") {
       setShowMenu(true);
     }
+    else
+    {
+      setShowMenu(false);
+    }
   }, [token]);
+
+
+  function logoutButton() {
+    const closeLogout = (e) => {
+      if (e.target.parentNode.classList[0] !== 'profile') setShowLogout(false);
+      document.body.removeEventListener('mouseup', closeLogout);
+    };
+
+    if (showLogout)
+    {
+      setShowLogout(false);
+    }
+    else
+    {
+      setShowLogout(true);
+      document.body.addEventListener('mouseup', closeLogout);
+    }
+  }
+
+
 
   async function searchingUser(e) {
     setSearchQuery(e.target.value);
@@ -47,6 +74,14 @@ export default function HeaderMenu() {
   function submitSearch(event) {
     event.preventDefault();
     console.log("ok");
+  }
+
+  function logout() {
+    localStorage.clear();
+    setImage('');
+    setToken('');
+
+    navigate('/');
   }
 
   return (
@@ -75,7 +110,7 @@ export default function HeaderMenu() {
               ))}
             </SearchResult>
           </DesktopSearchBox>
-          <div className="profile" onClick={() => setShowLogout(!showLogout)}>
+          <div className="profile" onClick={logoutButton}>
             <MdOutlineKeyboardArrowDown className="arrowDown" />
             <MdKeyboardArrowUp className="arrowUp" />
             <img src={image} alt="" />
@@ -85,14 +120,14 @@ export default function HeaderMenu() {
         <MobileMenu>
           <div>
             <h1>LINKR</h1>
-            <div className="profile" onClick={() => setShowLogout(!showLogout)}>
+            <div className="profile" onClick={logoutButton}>
               <MdOutlineKeyboardArrowDown className="arrowDown" />
               <MdKeyboardArrowUp className="arrowUp" />
               <img src={image} alt="" />
             </div>
           </div>
         </MobileMenu>
-        {/* 
+        {/*
         <MobileSearchBox>
           teste
           <div className="search-box">
@@ -105,7 +140,7 @@ export default function HeaderMenu() {
       </HeaderMenuContainer>
 
       <Logout showLogout={showLogout}>
-        <div>
+        <div onClick={logout} className="logout">
           <h3>Logout</h3>
         </div>
       </Logout>

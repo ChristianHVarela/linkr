@@ -1,7 +1,8 @@
 import { Container, HLine, HashList, Hashtag } from "./styles";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import api from "../../config/api";
+import { AuthContext } from "../../contexts/authContext";
 
 const MOCKDATA = [
 	{ id: 1, hashtag: "react" },
@@ -16,21 +17,22 @@ const MOCKDATA = [
 	{ id: 10, hashtag: "reactquery" },
 ];
 
-
-
 function Trending() {
 	const [trending, setTrending] = useState([]);
+	const { config, update } = useContext(AuthContext);
 	async function getTrending() {
-		try{
-			const { data } = await api.get("/trending");
+		try {
+			const { data } = await api.get("/trending", config);
 			setTrending(data);
-		} catch(err){
+			console.log(data);
+		} catch (err) {
 			alert("Erro ao carregar os trending.");
 		}
 	}
 	useEffect(() => {
 		getTrending();
-	});
+	},[update]);
+
 	return (
 		<Container>
 			<h1>trending</h1>
@@ -38,8 +40,8 @@ function Trending() {
 			<HashList>
 				{trending.map((item) => (
 					<Hashtag key={item.id}>
-						<Link to={`/hashtag/${item.hashtag}`}>
-							#{item.hashtag}
+						<Link to={`/hashtag/${item.name}`}>
+							#{item.name}
 						</Link>
 					</Hashtag>
 				))}
