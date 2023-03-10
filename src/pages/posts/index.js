@@ -6,7 +6,7 @@ import { AuthContext } from "../../contexts/authContext"
 import * as S from "./styles"
 
 const Posts = () => {
-    const { image, config } = useContext(AuthContext)
+    const { image, config, update } = useContext(AuthContext)
     const [posts, setPosts] = useState(null)
 
     useEffect(() => {
@@ -15,7 +15,7 @@ const Posts = () => {
             getPosts();
         }, 5000);
         return () => clearInterval(interval);
-    }, []);
+    }, [update]);
 
     const getPosts = async () => {
         try {

@@ -127,3 +127,19 @@ export const PostTop = styled.div`
 		cursor: pointer;
 	}
 `;
+export const EditInput = styled.textarea`
+	width: 100%;
+	height: 45px;
+	font-family: "Lato";
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+	color: #4c4c4c;
+	border-radius: 7px;
+	border: none;
+	padding: 10px;
+	box-sizing: border-box;
+	&:focus {
+		outline: none;
+	}
+`;
