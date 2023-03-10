@@ -59,15 +59,19 @@ const PostTimeline = (props) => {
 		}
 	};
 
+	function openUserPage(id) {
+		navigate(`/user/${id}`)
+	}
+
 	return (
 		<>
 			<S.ContainerPost>
-				<S.ContainerImageProfile>
+				<S.ContainerImageProfile onClick={() => openUserPage(post.user_id)}>
 					<S.ImageProfile src={post.image_profile} alt="" />
 				</S.ContainerImageProfile>
 				<S.ContainerContent>
 					<S.PostTop>
-						<S.UserName>{post.user_name}</S.UserName>
+						<S.UserName onClick={() => openUserPage(post.user_id)}>{post.user_name}</S.UserName>
 						{post.author_match && (
 							<div>
 								<FaPencilAlt onClick={handleEdit} />
