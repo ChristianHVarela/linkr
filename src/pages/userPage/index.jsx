@@ -13,7 +13,7 @@ const UserPage = () => {
 
   useEffect(() => {
     getUserPosts();
-  }, []);
+  }, [id]);
 
   const getUserPosts = async () => {
     try {

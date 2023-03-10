@@ -86,27 +86,9 @@ export default function HeaderMenu() {
         <DesktopMenu showLogout={showLogout} onSubmit={submitSearch}>
           <h1>linkr</h1>
 
-          <DesktopSearchBox searchQuery={searchQuery} searchResults={searchResults}>
-            <DebounceInput
-              debounceTimeout={300}
-              forceNotifyByEnter={true}
-              type="text"
-              placeholder="Search for people"
-              value={searchQuery}
-              onChange={(e) => searchingUser(e)}
-            />
-            <button type="submit">
-              <RxMagnifyingGlass />
-            </button>
-            <SearchResult searchQuery={searchQuery} searchResults={searchResults}>
-              {searchResults.map((m) => (
-                <div key={m.id}>
-                  <img src={m.image} alt="" />
-                  <p>{m.name}</p>
-                </div>
-              ))}
-            </SearchResult>
-          </DesktopSearchBox>
+          <DesktopSearchBar 
+          searchResults={searchResults} searchQuery={searchQuery} setSearchResults={setSearchResults} setSearchQuery={setSearchQuery}
+          />
 
           <div className="profile" onClick={logoutButton}>
             <MdOutlineKeyboardArrowDown className="arrowDown" />
