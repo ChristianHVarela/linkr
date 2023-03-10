@@ -33,6 +33,7 @@ export default function DesktopSearchBar(props) {
   return (
     <DesktopSearchBox searchResults={searchResults} searchQuery={searchQuery}>
       <DebounceInput
+        data-test="search"
         debounceTimeout={300}
         forceNotifyByEnter={true}
         type="text"
@@ -45,7 +46,7 @@ export default function DesktopSearchBar(props) {
       </button>
       <SearchResult searchResults={searchResults} searchQuery={searchQuery}>
         {searchResults.map((m) => (
-          <div key={m.id} onClick={() => openUser(m.id)}>
+          <div data-test="user-search" key={m.id} onClick={() => openUser(m.id)}>
             <img src={m.image} alt="" />
             <p>{m.name}</p>
           </div>
