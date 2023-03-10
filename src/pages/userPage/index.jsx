@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import UserTimeline from "../../components/UserTimeline";
 import api from "../../config/api";
+import { AuthContext } from "../../contexts/authContext";
 import * as S from "./styles";
 
 const UserPage = () => {
   const { id } = useParams();
 
   const [userPosts, setUserPosts] = useState(null);
+  const { config } = useContext(AuthContext);
 
   console.log(userPosts);
 
@@ -17,9 +19,11 @@ const UserPage = () => {
 
   const getUserPosts = async () => {
     try {
-      const { data } = await api.get(`/user/${id}`);
+      console.log(id);
+      const { data } = await api.get(`/user/${id}`, config);
       setUserPosts(data);
     } catch (error) {
+      console.log(error);
       alert(
         "An error occured while trying to fetch the posts, please refresh the page"
       );
