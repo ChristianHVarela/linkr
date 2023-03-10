@@ -4,10 +4,11 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 300px;
-	min-height: 400px;
+	height: fit-content;
 	background: #171717;
 	border-radius: 16px;
-	margin: 0 0 0 30px;
+	margin-left: 2rem;
+	margin-top: 7rem;
 	> h1 {
         font-family: 'Oswald', sans-serif;
 		font-weight: 700;
@@ -16,6 +17,9 @@ const Container = styled.div`
 		color: #ffffff;
         margin: 16px 0 12px 16px;
 	}
+	@media (max-width: 710px){
+        display: none;
+    }
 `;
 
 const HLine = styled.div`
