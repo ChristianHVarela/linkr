@@ -21,9 +21,7 @@ const PostTimeline = (props) => {
 	const [tooltipContent, setTooltipContent] = useState(`você, ${post.likes[0]} e outras ${numLikes - 2} pessoas`);
 
 	const { config, update, setUpdate } = useContext(AuthContext);
-
 	useEffect(() => {
-		console.log(tooltipContent);
 		if (numLikes === 0) setTooltipContent(`Nenhuma curtida`)
 		else if (numLikes === 1)
 		{
