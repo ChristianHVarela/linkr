@@ -28,7 +28,7 @@ export default function HeaderMenu() {
     if (token !== "") {
       setShowMenu(true);
     }
-  }, [token]); 
+  }, [token]);
 
   async function searchingUser(e) {
     setSearchQuery(e.target.value);
