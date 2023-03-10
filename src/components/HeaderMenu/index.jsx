@@ -1,6 +1,5 @@
 import { MdOutlineKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { useContext, useEffect, useState } from "react";
-
 import { DesktopMenu, HeaderMenuContainer, Logout, MobileMenu } from "./styles";
 import { AuthContext } from "../../contexts/authContext";
 import DesktopSearchBar from "../DesktopSearchBox";
@@ -39,6 +38,7 @@ export default function HeaderMenu() {
     } else {
       setShowLogout(true);
       document.body.addEventListener("mouseup", closeLogout);
+
     }
   }
 
@@ -58,23 +58,26 @@ export default function HeaderMenu() {
     <>
       <HeaderMenuContainer showMenu={showMenu}>
         <DesktopMenu showLogout={showLogout} onSubmit={submitSearch}>
-          <h1>linkr</h1>
+          <h1 onClick={() => navigate("/timeline")}>linkr</h1>
 
           <DesktopSearchBar
             searchResults={searchResults}
             searchQuery={searchQuery}
             setSearchResults={setSearchResults}
             setSearchQuery={setSearchQuery}
-
           />
 
           <div className="profile" onClick={logoutButton}>
             <MdOutlineKeyboardArrowDown className="arrowDown" />
             <MdKeyboardArrowUp className="arrowUp" />
-            <img src={image} alt="" />
+            <img data-test="avatar" src={image} alt="" />
+            <Logout showLogout={showLogout}>
+              <div data-test="menu" onClick={logout} className="logout">
+                <h3 data-test="logout" >Logout</h3>
+              </div>
+            </Logout>
           </div>
         </DesktopMenu>
-
         <MobileMenu>
           <div>
             <h1>linkr</h1>
@@ -93,11 +96,7 @@ export default function HeaderMenu() {
         </MobileMenu>
       </HeaderMenuContainer>
 
-      <Logout showLogout={showLogout}>
-        <div onClick={logout} className="logout">
-          <h3>Logout</h3>
-        </div>
-      </Logout>
+
     </>
   );
 }

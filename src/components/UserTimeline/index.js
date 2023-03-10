@@ -1,10 +1,10 @@
 import { ThreeDots } from "react-loader-spinner" 
-import UserPostTimeline from "../UserPostTimeline"
+import PostTimeline from "../PostTimeline"
 import * as S from "./styles"
 
 const UserTimeline = (props) => {
     const {userPosts} = props
-
+    userPosts && console.log(userPosts[1]);
     return (
         <S.Container>
             {
@@ -17,7 +17,8 @@ const UserTimeline = (props) => {
                 wrapperStyle={{}}
                 wrapperClassName=""
                 visible={true}
-                /> : userPosts[1].length === 0 ? <S.MessageEmpty>There are no posts yet</S.MessageEmpty> : userPosts[1].map((item, index) => {return <UserPostTimeline key={index} userPosts={item} />})
+                /> : userPosts[1].length === 0 ? <S.MessageEmpty>There are no posts yet</S.MessageEmpty> : 
+                userPosts[1].map((item, index) => {return <PostTimeline key={index} post={item} />})
             }
         </S.Container>
     )

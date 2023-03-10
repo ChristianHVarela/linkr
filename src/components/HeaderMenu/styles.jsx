@@ -16,7 +16,7 @@ export const HeaderMenuContainer = styled.header`
 `;
 
 export const DesktopMenu = styled.div`
-  width: 1440px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
@@ -29,7 +29,12 @@ export const DesktopMenu = styled.div`
     line-height: 54px;
     letter-spacing: 0.05em;
     color: #ffffff;
+    cursor: pointer;
     /* width: 438.5px; */
+  }
+
+  .profile{
+    position: relative;
   }
 
   div.profile {
@@ -167,7 +172,7 @@ export const Logout = styled.div`
   justify-content: flex-end;
   background-color: transparent;
   position: fixed;
-  top: 72px;
+  top: 70px;
   right: 0;
 
   div {

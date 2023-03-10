@@ -4,19 +4,6 @@ import { useContext, useEffect, useState } from "react";
 import api from "../../config/api";
 import { AuthContext } from "../../contexts/authContext";
 
-const MOCKDATA = [
-	{ id: 1, hashtag: "react" },
-	{ id: 2, hashtag: "javascript" },
-	{ id: 3, hashtag: "typescript" },
-	{ id: 4, hashtag: "nodejs" },
-	{ id: 5, hashtag: "reactnative" },
-	{ id: 6, hashtag: "nextjs" },
-	{ id: 7, hashtag: "styledcomponents" },
-	{ id: 8, hashtag: "reactrouter" },
-	{ id: 9, hashtag: "reactquery" },
-	{ id: 10, hashtag: "reactquery" },
-];
-
 function Trending() {
 	const [trending, setTrending] = useState([]);
 	const { config, update } = useContext(AuthContext);
@@ -34,12 +21,12 @@ function Trending() {
 	},[update]);
 
 	return (
-		<Container>
+		<Container data-test="trending">
 			<h1>trending</h1>
 			<HLine />
 			<HashList>
 				{trending.map((item) => (
-					<Hashtag key={item.id}>
+					<Hashtag data-test="hashtag" key={item.id}>
 						<Link to={`/hashtag/${item.name}`}>
 							#{item.name}
 						</Link>

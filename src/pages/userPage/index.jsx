@@ -7,10 +7,10 @@ import * as S from "./styles";
 
 const UserPage = () => {
   const { id } = useParams();
-
   const { config } = useContext(AuthContext)
 
   const [userPosts, setUserPosts] = useState(null);
+
 
   useEffect(() => {
     getUserPosts();
@@ -18,9 +18,12 @@ const UserPage = () => {
 
   const getUserPosts = async () => {
     try {
+
       const { data } = await api.get(`/user/${id}`, config );
+
       setUserPosts(data);
     } catch (error) {
+      console.log(error);
       alert(
         "An error occured while trying to fetch the posts, please refresh the page"
       );

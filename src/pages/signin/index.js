@@ -42,9 +42,9 @@ export default function Signin() {
         <HomeStyle>
             <HomeLogo />
             <FormContainer onSubmit={submitSignIn}>
-                <input placeholder="email" type='email' value={email} onChange={ (e) => setEmail(e.target.value) } />
-                <input placeholder="password" type='password'  value={password} onChange={ (e) => setPassword(e.target.value) } />
-                <button type='submit' disabled={loading} >
+                <input placeholder="email" type='email' data-test="email" value={email} onChange={ (e) => setEmail(e.target.value) } />
+                <input placeholder="password" type='password' data-test="password" value={password} onChange={ (e) => setPassword(e.target.value) } />
+                <button type='submit' disabled={loading} data-test="login-btn">
                     {
                         loading ? <ThreeDots
                         height="80"
@@ -59,7 +59,7 @@ export default function Signin() {
                             <>Log In</>
                     }
                 </button>
-                <Link to={'/signup'}>First time? Create an account!</Link>
+                <Link data-test="sign-up-link" to={'/signup'}>First time? Create an account!</Link>
             </FormContainer>
         </HomeStyle>
     );

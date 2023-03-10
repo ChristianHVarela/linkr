@@ -32,16 +32,16 @@ const PostCreation = (props) => {
     }
 
     return (
-        <S.Container>
+        <S.Container data-test="publish-box">
             <S.ContainerImageProfile>
                 <S.ImageProfile src={imageUrl} alt="" />
             </S.ContainerImageProfile>
             <S.FormPost onSubmit={handleChange}>
                 <S.Title>What are you going to share today?</S.Title>
-                <S.InputLink placeholder="http://..." onChange={e => setLink(e.target.value)} value={link} readOnly={loading} />
-                <S.InputDescription placeholder="Awesome article about #javascript" onChange={e => setDescription(e.target.value)} value={description} readOnly={loading} />
+                <S.InputLink data-test="link" placeholder="http://..." onChange={e => setLink(e.target.value)} value={link} readOnly={loading} />
+                <S.InputDescription data-test="description" placeholder="Awesome article about #javascript" onChange={e => setDescription(e.target.value)} value={description} readOnly={loading} />
                 <S.ContainerButtonSubmit>
-                    <S.ButtonSubmit disabled={loading}>{loading ? "Publishing..." : "Publish"}</S.ButtonSubmit>
+                    <S.ButtonSubmit data-test="publish-btn" disabled={loading}>{loading ? "Publishing..." : "Publish"}</S.ButtonSubmit>
                 </S.ContainerButtonSubmit>
             </S.FormPost>
         </S.Container>
