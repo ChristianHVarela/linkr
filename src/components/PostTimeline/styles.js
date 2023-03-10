@@ -10,13 +10,20 @@ export const ContainerPost = styled.div`
 	justify-content: space-between;
 `;
 export const ContainerImageProfile = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 17px;
+    padding-right: 0px;
+
+    svg{
+        margin-top: 20px;
+    }
 `
 export const ImageProfile = styled.img`
     max-width: 50px;
     max-height: 50px;
     border-radius: 26.5px;
-    margin-top: 17px;
-    margin-left: 17px;
     object-fit: cover;
 `
 export const ContainerContent = styled.div`

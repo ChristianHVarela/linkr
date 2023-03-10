@@ -6,12 +6,15 @@ import { useContext, useState } from "react";
 import DeleteModal from "../Modal";
 import api from "../../config/api";
 import { AuthContext } from "../../contexts/authContext";
+import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
 const PostTimeline = (props) => {
 	const { post } = props;
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [edit, setEdit] = useState(false);
 	const [description, setDescription] = useState(post.description);
+	const [liked, setLiked] = useState(post.liked);
+	const [numLikes, setNumLikes] = useState(post.num_likes);
 	const [loading, setLoading] = useState(false);
 
 	const { config, update, setUpdate } = useContext(AuthContext);
@@ -59,11 +62,29 @@ const PostTimeline = (props) => {
 		}
 	};
 
+	const likePost = async () => {
+		console.log(config);
+		await api.get(`/posts/likes/${post.id}`, config);
+		setNumLikes(numLikes + 1);
+		setLiked(true);
+	}
+	const dislikePost = async () => {
+		console.log(config);
+		await api.delete(`/posts/likes/${post.id}`, config);
+		setNumLikes(numLikes - 1);
+		setLiked(false);
+	}
+
 	return (
 		<>
 			<S.ContainerPost>
 				<S.ContainerImageProfile>
 					<S.ImageProfile src={post.image_profile} alt="" />
+					{
+						liked ?
+							<IoHeart onClick={dislikePost} color='red' /> :
+							<IoHeartOutline onClick={likePost} color='white' />
+					}
 				</S.ContainerImageProfile>
 				<S.ContainerContent>
 					<S.PostTop>
