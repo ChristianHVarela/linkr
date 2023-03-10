@@ -6,6 +6,9 @@ import { AuthContext } from "../../contexts/authContext";
 import DesktopSearchBar from "../DesktopSearchBox";
 import api from "../../config/api";
 import { useNavigate } from "react-router";
+import { DesktopSearchBox, SearchResult } from "../DesktopSearchBox/styles";
+import { DebounceInput } from "react-debounce-input";
+import { RxMagnifyingGlass } from "react-icons/rx";
 
 export default function HeaderMenu() {
   const [showMenu, setShowMenu] = useState(false);
@@ -82,7 +85,8 @@ export default function HeaderMenu() {
       <HeaderMenuContainer showMenu={showMenu}>
         <DesktopMenu showLogout={showLogout} onSubmit={submitSearch}>
           <h1>linkr</h1>
-          <DesktopSearchBox searchQuery={searchQuery}>
+
+          <DesktopSearchBox searchQuery={searchQuery} searchResults={searchResults}>
             <DebounceInput
               debounceTimeout={300}
               forceNotifyByEnter={true}
@@ -94,7 +98,7 @@ export default function HeaderMenu() {
             <button type="submit">
               <RxMagnifyingGlass />
             </button>
-            <SearchResult searchQuery={searchQuery}>
+            <SearchResult searchQuery={searchQuery} searchResults={searchResults}>
               {searchResults.map((m) => (
                 <div key={m.id}>
                   <img src={m.image} alt="" />
@@ -103,6 +107,7 @@ export default function HeaderMenu() {
               ))}
             </SearchResult>
           </DesktopSearchBox>
+
           <div className="profile" onClick={logoutButton}>
             <MdOutlineKeyboardArrowDown className="arrowDown" />
             <MdKeyboardArrowUp className="arrowUp" />
