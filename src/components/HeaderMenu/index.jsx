@@ -1,18 +1,14 @@
-import { RxMagnifyingGlass } from "react-icons/rx";
 import { MdOutlineKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { useContext, useEffect, useState } from "react";
-import { DebounceInput } from "react-debounce-input";
-import {
-  DesktopMenu,
-  DesktopSearchBox,
-  HeaderMenuContainer,
-  Logout,
-  MobileMenu,
-  SearchResult,
-} from "./styles";
+
+import { DesktopMenu, HeaderMenuContainer, Logout, MobileMenu } from "./styles";
 import { AuthContext } from "../../contexts/authContext";
+import DesktopSearchBar from "../DesktopSearchBox";
 import api from "../../config/api";
 import { useNavigate } from "react-router";
+import { DesktopSearchBox, SearchResult } from "../DesktopSearchBox/styles";
+import { DebounceInput } from "react-debounce-input";
+import { RxMagnifyingGlass } from "react-icons/rx";
 
 export default function HeaderMenu() {
   const [showMenu, setShowMenu] = useState(false);
@@ -79,9 +75,9 @@ export default function HeaderMenu() {
   function logout() {
     localStorage.clear();
     setImage('');
-    setToken('');
+    setToken('')
 
-    navigate('/');
+    navigate('/')
   }
 
   return (
@@ -89,27 +85,11 @@ export default function HeaderMenu() {
       <HeaderMenuContainer showMenu={showMenu}>
         <DesktopMenu showLogout={showLogout} onSubmit={submitSearch}>
           <h1>linkr</h1>
-          <DesktopSearchBox searchQuery={searchQuery}>
-            <DebounceInput
-              debounceTimeout={300}
-              forceNotifyByEnter={true}
-              type="text"
-              placeholder="Search for people"
-              value={searchQuery}
-              onChange={(e) => searchingUser(e)}
-            />
-            <button type="submit">
-              <RxMagnifyingGlass />
-            </button>
-            <SearchResult searchQuery={searchQuery}>
-              {searchResults.map((m) => (
-                <div key={m.id}>
-                  <img src={m.image} alt="" />
-                  <p>{m.name}</p>
-                </div>
-              ))}
-            </SearchResult>
-          </DesktopSearchBox>
+
+          <DesktopSearchBar 
+          searchResults={searchResults} searchQuery={searchQuery} setSearchResults={setSearchResults} setSearchQuery={setSearchQuery}
+          />
+
           <div className="profile" onClick={logoutButton}>
             <MdOutlineKeyboardArrowDown className="arrowDown" />
             <MdKeyboardArrowUp className="arrowUp" />
