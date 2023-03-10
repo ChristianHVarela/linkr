@@ -29,6 +29,7 @@ export const DesktopMenu = styled.div`
     line-height: 54px;
     letter-spacing: 0.05em;
     color: #ffffff;
+    cursor: pointer;
     /* width: 438.5px; */
   }
 

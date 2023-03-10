@@ -64,7 +64,7 @@ export default function HeaderMenu() {
     <>
       <HeaderMenuContainer showMenu={showMenu}>
         <DesktopMenu showLogout={showLogout} onSubmit={submitSearch}>
-          <h1>linkr</h1>
+          <h1 onClick={() => navigate("/timeline")}>linkr</h1>
 
           <DesktopSearchBar
           searchResults={searchResults} searchQuery={searchQuery} setSearchResults={setSearchResults} setSearchQuery={setSearchQuery}
