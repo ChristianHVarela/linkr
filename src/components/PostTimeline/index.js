@@ -23,10 +23,6 @@ const PostTimeline = (props) => {
 
 	const { config, update, setUpdate } = useContext(AuthContext);
 	useEffect(() => {
-<<<<<<< HEAD
-		console.log(likes);
-=======
->>>>>>> fe330002314c23c970715a59988943f46f2ab965
 		if (numLikes === 0) setTooltipContent(`Nenhuma curtida`)
 		else if (numLikes === 1)
 		{
