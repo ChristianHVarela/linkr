@@ -21,12 +21,12 @@ function Trending() {
 	},[update]);
 
 	return (
-		<Container>
+		<Container data-test="trending">
 			<h1>trending</h1>
 			<HLine />
 			<HashList>
 				{trending.map((item) => (
-					<Hashtag key={item.id}>
+					<Hashtag data-test="hashtag" key={item.id}>
 						<Link to={`/hashtag/${item.name}`}>
 							#{item.name}
 						</Link>

@@ -43,10 +43,11 @@ function DeleteModal({ modalIsOpen, setModalIsOpen, id }) {
 						<S.ModalButton
 							className="cancel"
 							onClick={() => setModalIsOpen(false)}
+							data-test="cancel"
 						>
 							No, go back
 						</S.ModalButton>
-						<S.ModalButton className="confirm" onClick={deletePost}>
+						<S.ModalButton data-test="confirm" className="confirm" onClick={deletePost}>
 							Yes, delete it
 						</S.ModalButton>
 					</div>
