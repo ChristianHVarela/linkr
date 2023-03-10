@@ -75,9 +75,9 @@ export default function HeaderMenu() {
   function logout() {
     localStorage.clear();
     setImage('');
-    setToken('');
+    setToken('')
 
-    navigate('/');
+    navigate('/')
   }
 
   return (
