@@ -7,7 +7,7 @@ import * as S from "./styles"
 
 const Posts = () => {
     const [posts, setPosts] = useState(null)
-    const { config } = useContext(AuthContext);
+    const { config, update } = useContext(AuthContext);
 
     useEffect(() => {
         getPosts();
@@ -15,7 +15,7 @@ const Posts = () => {
             getPosts();
         }, 5000);
         return () => clearInterval(interval);
-    }, []);
+    }, [update]);
 
     const getPosts = async () => {
         try {
