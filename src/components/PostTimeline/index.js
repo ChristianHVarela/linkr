@@ -7,6 +7,8 @@ import DeleteModal from "../Modal";
 import api from "../../config/api";
 import { AuthContext } from "../../contexts/authContext";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
+import { AiOutlineComment } from 'react-icons/ai';
+import { FiSend } from 'react-icons/fi';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 
@@ -18,6 +20,7 @@ const PostTimeline = (props) => {
 	const [liked, setLiked] = useState(post.liked_by_me);
 	const [numLikes, setNumLikes] = useState(Number(post.num_likes));
 	const [likes, setLikes] = useState(post.likes);
+	const [showComments, setShowComments] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [tooltipContent, setTooltipContent] = useState(`você, ${post.likes[0]} e outras ${numLikes - 2} pessoas`);
 
@@ -31,7 +34,7 @@ const PostTimeline = (props) => {
 		}
 		else
 		{
-			if(liked) setTooltipContent(`Você e ${likes[0].name} curtiu`);
+			if (liked) setTooltipContent(`Você e ${likes[0].name} curtiu`);
 			else setTooltipContent(`${likes[0].name} e ${likes[1].name} curtiu`);
 		}
 	}, [likes]);
@@ -47,14 +50,16 @@ const PostTimeline = (props) => {
 	};
 
 	const requestEdit = async () => {
-		try {
+		try
+		{
 			setLoading(true);
 			await api.put(`/posts/${post.id}`, { description }, config);
 			setEdit(false);
 			setLoading(false);
 			setUpdate(update + 1);
 			//post.description = description; //temporario?
-		} catch (error) {
+		} catch (error)
+		{
 			console.log(error);
 			alert("An error occured while trying to edit the post");
 			setLoading(false);
@@ -64,16 +69,19 @@ const PostTimeline = (props) => {
 	};
 
 	const saveDescription = async (event) => {
-		if (event.key === "Enter") {
+		if (event.key === "Enter")
+		{
 			await requestEdit();
-		} else if (event.key === "Escape") {
+		} else if (event.key === "Escape")
+		{
 			setDescription(post.description);
 			setEdit(false);
 		}
 	};
 
 	const handleFocus = (textarea) => {
-		if (textarea) {
+		if (textarea)
+		{
 			const { value } = textarea;
 			textarea.focus();
 			textarea.setSelectionRange(value.length, value.length);
@@ -86,23 +94,23 @@ const PostTimeline = (props) => {
 		setNumLikes(Number(numLikes) + 1);
 		const likes = await api.get(`/posts/likes/${post.id}`, config);
 		setLikes(likes.data.likes);
-	}
+	};
 
 	const dislikePost = async () => {
 		setLiked(false);
 		setNumLikes(Number(numLikes) - 1);
 		const likes = await api.delete(`/posts/likes/${post.id}`, config);
 		setLikes(likes.data.likes);
-  }
+	};
+
 	function openUserPage(id) {
 		navigate(`/user/${id}`)
-
 	}
 
 	return (
-		<>
-			<S.ContainerPost data-test="post">
-				<S.ContainerImageProfile>
+		<S.ContainerPost>
+			<S.Post data-test="post">
+				<S.SideBar>
 					<S.ImageProfile onClick={() => openUserPage(post.user_id)} src={post.image_profile} alt="" />
 					{
 						liked ?
@@ -111,13 +119,15 @@ const PostTimeline = (props) => {
 					}
 					<p data-test="counter" data-tooltip-id={`${post.id}`} className={`numLikes`}>{numLikes} likes</p>
 					<Tooltip id={`${post.id}`} content={tooltipContent} place="bottom" data-test="tooltip" className="tooltip"></Tooltip>
-				</S.ContainerImageProfile>
+					<AiOutlineComment color="white" onClick={() => setShowComments(!showComments)} />
+					<p>0 comments</p>
+				</S.SideBar>
 				<S.ContainerContent>
 					<S.PostTop>
 						<S.UserName data-test="username" onClick={() => openUserPage(post.user_id)}>{post.user_name}</S.UserName>
 						{post.author_match && (
 							<div>
-								<FaPencilAlt onClick={handleEdit} data-test="edit-btn"/>
+								<FaPencilAlt onClick={handleEdit} data-test="edit-btn" />
 								<FaTrashAlt
 									data-test="delete-btn"
 									onClick={() => setModalIsOpen(true)}
@@ -161,13 +171,24 @@ const PostTimeline = (props) => {
 						<S.ImageMetadata src={post.image_metadata} alt="/" />
 					</S.ContainerMetadata>
 				</S.ContainerContent>
-			</S.ContainerPost>
+			</S.Post>
+			{
+				showComments ?
+					<S.ContainerComments>
+						<S.MyComment>
+							<img src={post.image_profile} alt="" />
+							<input placeholder="write a comment..."></input>
+						</S.MyComment>
+					</S.ContainerComments>
+					: <></>
+			}
+
 			<DeleteModal
 				id={post.id}
 				modalIsOpen={modalIsOpen}
 				setModalIsOpen={setModalIsOpen}
 			/>
-		</>
+		</S.ContainerPost>
 	);
 };
 
