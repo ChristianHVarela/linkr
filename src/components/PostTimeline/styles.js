@@ -2,15 +2,25 @@ import styled from "styled-components";
 
 export const ContainerPost = styled.div`
   width: 100%;
+  height: fit-content;
+  min-height: 275px;
+  border-radius: 16px;
+  margin-bottom: 15px;
+`;
+
+export const Post = styled.div`
+  width: 100%;
+  height: fit-content;
   min-height: 275px;
   border-radius: 16px;
   background: #171717;
-  margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
+  position: relative;
+  z-index: 2;
 `;
-export const ContainerImageProfile = styled.div`
 
+export const SideBar = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,9 +28,8 @@ export const ContainerImageProfile = styled.div`
     padding-right: 0px;
 
     svg{
-        width: 20px;
-        height: 20px;
-        margin-top: 20px;
+        width: 22px;
+        height: 22px;
         margin-bottom: 5px;
     }
 
@@ -31,6 +40,7 @@ export const ContainerImageProfile = styled.div`
         font-size: 11px;
         font-weight: 400;
         text-align: center;
+        margin-bottom: 15px;
     }
 
     .tooltip{
@@ -46,7 +56,7 @@ export const ImageProfile = styled.img`
   height: 50px;
   border-radius: 26.5px;
   margin-top: 17px;
-  margin-left: 17px;
+  margin-bottom: 20px;
 `;
 
 export const ContainerContent = styled.div`
@@ -70,7 +80,7 @@ export const UserName = styled.p`
   margin-top: 20px;
 
   :hover {
-    cursor: pointer; 
+    cursor: pointer;
   }
 `;
 export const Description = styled.p`
@@ -174,5 +184,47 @@ export const EditInput = styled.textarea`
   box-sizing: border-box;
   &:focus {
     outline: none;
+  }
+`;
+
+export const ContainerComments = styled.div`
+  width: 100%;
+  height: fit-content;
+  background-color: #1E1E1E;
+  border-radius: 16px;
+  margin-top: -25px;
+  padding: 25px;
+`;
+
+export const Comment = styled.div`
+
+`;
+
+export const MyComment = styled.div`
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+
+  img{
+    width: 39px;
+    height: 39px;
+    border-radius: 26.5px;
+    margin-right: 14px;
+  }
+
+  input{
+    width: 100%;
+    height: 39px;
+    padding: 11px 15px;
+    padding-right: 45px;
+    background-color: #252525;
+    color: #ACACAC;
+    border: none;
+    border-radius: 8px;
+    font-family: 'lato';
+    font-size: 14px;
   }
 `;
