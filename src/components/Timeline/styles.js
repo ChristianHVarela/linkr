@@ -7,6 +7,7 @@ export const Container = styled.div`
     background: transparent;
     align-items: center;
     margin-top: 30px;
+    z-index: 0;
     @media (max-width: 710px){
         width: 100%;
     }

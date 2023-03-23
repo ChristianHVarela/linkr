@@ -34,7 +34,9 @@ const Posts = () => {
                 <PostCreation imageUrl={image} headers={config} />
                 <Timeline posts={posts} />
             </S.ContainerCenter>
-            <Trending />
+            <S.ContainerTrending>
+                <Trending />
+            </S.ContainerTrending>
         </S.Container>
     )
 }

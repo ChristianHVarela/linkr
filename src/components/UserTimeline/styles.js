@@ -7,6 +7,7 @@ export const Container = styled.div`
     background: transparent;
     align-items: center;
     margin-top: 30px;
+    z-index: 0;
 `
 
 export const MessageEmpty = styled.p`

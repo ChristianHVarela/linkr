@@ -4,7 +4,6 @@ import * as S from "./styles"
 
 const UserTimeline = (props) => {
     const {userPosts} = props
-    userPosts && console.log(userPosts[1]);
     return (
         <S.Container>
             {

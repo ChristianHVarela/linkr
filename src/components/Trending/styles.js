@@ -7,8 +7,7 @@ const Container = styled.div`
 	height: fit-content;
 	background: #171717;
 	border-radius: 16px;
-	margin-left: 2rem;
-	margin-top: 7rem;
+	
 	> h1 {
         font-family: 'Oswald', sans-serif;
 		font-weight: 700;
