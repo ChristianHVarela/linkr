@@ -11,7 +11,6 @@ function Trending() {
 		try {
 			const { data } = await api.get("/trending", config);
 			setTrending(data);
-			console.log(data);
 		} catch (err) {
 			alert("Erro ao carregar os trending.");
 		}

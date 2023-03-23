@@ -15,6 +15,10 @@ export const ContainerCenter = styled.div`
     align-items: center;
     flex-direction: column;
 `
+export const ContainerTrending = styled.div`
+    margin-left: 2rem;
+	margin-top: 7rem;
+`
 export const Title = styled.p`
     font-family: "Oswald";
     font-weight: 700;
