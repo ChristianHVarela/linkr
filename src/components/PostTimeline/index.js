@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ReactTagify } from "react-tagify";
-import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
+import { FaTrashAlt, FaPencilAlt, FaCreativeCommonsZero } from "react-icons/fa";
 import * as S from "./styles";
 import { useContext, useEffect, useState } from "react";
 import DeleteModal from "../Modal";
@@ -8,9 +8,9 @@ import api from "../../config/api";
 import { AuthContext } from "../../contexts/authContext";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { AiOutlineComment } from 'react-icons/ai';
-import { FiSend } from 'react-icons/fi';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
+import ShowComments from "../Comments";
 
 const PostTimeline = (props) => {
 	const { post } = props;
@@ -23,6 +23,7 @@ const PostTimeline = (props) => {
 	const [showComments, setShowComments] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [tooltipContent, setTooltipContent] = useState(`você, ${post.likes[0]} e outras ${numLikes - 2} pessoas`);
+	const { image } = useContext(AuthContext);
 
 	const { config, update, setUpdate } = useContext(AuthContext);
 	useEffect(() => {
@@ -34,8 +35,8 @@ const PostTimeline = (props) => {
 		}
 		else
 		{
-			if (liked) setTooltipContent(`Você e ${likes[0].name} curtiu`);
-			else setTooltipContent(`${likes[0].name} e ${likes[1].name} curtiu`);
+			if (liked) setTooltipContent(`Você e ${likes[0].name} curtiram`);
+			else setTooltipContent(`${likes[0].name} e ${likes[1].name} curtiram`);
 		}
 	}, [likes]);
 
@@ -107,6 +108,8 @@ const PostTimeline = (props) => {
 		navigate(`/user/${id}`)
 	}
 
+
+
 	return (
 		<S.ContainerPost>
 			<S.Post data-test="post">
@@ -173,14 +176,8 @@ const PostTimeline = (props) => {
 				</S.ContainerContent>
 			</S.Post>
 			{
-				showComments ?
-					<S.ContainerComments>
-						<S.MyComment>
-							<img src={post.image_profile} alt="" />
-							<input placeholder="write a comment..."></input>
-						</S.MyComment>
-					</S.ContainerComments>
-					: <></>
+				showComments &&
+				<ShowComments image={image} postId={post.id} />
 			}
 
 			<DeleteModal
