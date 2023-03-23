@@ -31,6 +31,7 @@ export const SideBar = styled.div`
         width: 22px;
         height: 22px;
         margin-bottom: 5px;
+        cursor: pointer;
     }
 
     p{
@@ -55,7 +56,6 @@ export const ImageProfile = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 26.5px;
-  margin-top: 17px;
   margin-bottom: 20px;
 `;
 
@@ -184,47 +184,5 @@ export const EditInput = styled.textarea`
   box-sizing: border-box;
   &:focus {
     outline: none;
-  }
-`;
-
-export const ContainerComments = styled.div`
-  width: 100%;
-  height: fit-content;
-  background-color: #1E1E1E;
-  border-radius: 16px;
-  margin-top: -25px;
-  padding: 25px;
-`;
-
-export const Comment = styled.div`
-
-`;
-
-export const MyComment = styled.div`
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 25px;
-
-  img{
-    width: 39px;
-    height: 39px;
-    border-radius: 26.5px;
-    margin-right: 14px;
-  }
-
-  input{
-    width: 100%;
-    height: 39px;
-    padding: 11px 15px;
-    padding-right: 45px;
-    background-color: #252525;
-    color: #ACACAC;
-    border: none;
-    border-radius: 8px;
-    font-family: 'lato';
-    font-size: 14px;
   }
 `;
