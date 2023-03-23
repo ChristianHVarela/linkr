@@ -1,6 +1,6 @@
 import { Refresh, ReloadButton } from "./styles";
-import { useContext, useState } from "react";
-import { AuthContext } from "../../contexts/authContext";
+import { useState } from "react";
+
 
 function ReloadPosts({ postsCount, setPosts, newPosts }) {
 	const [loading, setLoading] = useState(false);
