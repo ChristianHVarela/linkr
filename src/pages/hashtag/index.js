@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Timeline from "../../components/Timeline"
+import Trending from "../../components/Trending"
 import api from "../../config/api"
 import { AuthContext } from "../../contexts/authContext"
 import * as S from "./styles"
@@ -21,17 +22,17 @@ const HashtagPosts = () => {
 
     useEffect(() => {
         getPosts();
-        const interval = setInterval(() => {
-            getPosts();
-        }, 5000);
-        return () => clearInterval(interval);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [update]);
+    }, [update,hashtag]);
 
     return (
         <S.Container>
+            <S.ContainerCenter>
             <S.Title data-test="hashtag-title">#{hashtag}</S.Title>
-            <Timeline posts={posts} />
+				<Timeline posts={posts} />
+			</S.ContainerCenter>
+			<S.ContainerTrending>
+				<Trending />
+			</S.ContainerTrending>
         </S.Container>
     )
 }
