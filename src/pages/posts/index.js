@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroller";
 import useInterval from "use-interval";
+import LoadingScroller from "../../components/LoadingScroller";
 import ReloadPosts from "../../components/NewPosts";
 import PostCreation from "../../components/PostCreation";
 import Timeline from "../../components/Timeline";
@@ -12,6 +14,8 @@ const Posts = () => {
 	const { image, config, update } = useContext(AuthContext);
 	const [posts, setPosts] = useState(null);
 	const [newPosts, setNewPosts] = useState(null);
+	const [page, setPage] = useState(2);
+	const [hasMoreItems, setHasMoreItems] = useState(false);
 	const newCount = posts
 		? newPosts.map((e) => e.id).indexOf(posts[0].id)
 		: null;
@@ -34,12 +38,26 @@ const Posts = () => {
 			const { data } = await api.get("/timeline", config);
 			setPosts(data);
 			setNewPosts(data);
+			setHasMoreItems(data.length === 10);
 		} catch (error) {
 			alert(
 				"An error occured while trying to fetch the posts, please refresh the page"
 			);
 		}
 	};
+
+	const loadMore = async () => {
+		try {
+			const { data } = await api.get(`/timeline?page=${page}`, config);
+			setPosts([...posts, ...data]);
+			setPage(page + 1);
+			if(data.length < 10) {
+				setHasMoreItems(false);
+			}
+		} catch (e) {
+			console.log(`Couldn't fetch more posts: ${e}`);
+		}
+	}
 
 	return (
 		<S.Container>
@@ -53,7 +71,16 @@ const Posts = () => {
 						newPosts={newPosts}
 					/>
 				)}
-				<Timeline posts={posts} />
+				<InfiniteScroll
+					pageStart={0}
+					loadMore={loadMore}
+					hasMore={hasMoreItems}
+					loader={
+						<LoadingScroller key={0} />
+					}
+				>
+					<Timeline posts={posts} />
+				</InfiniteScroll>
 			</S.ContainerCenter>
 			<S.ContainerTrending>
 				<Trending />

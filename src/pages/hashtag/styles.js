@@ -1,15 +1,22 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width: 100vw;
     min-height: 100vh;
     height: 100%;
     background: #333333;
+    margin-top: 72px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
+`
+export const ContainerCenter = styled.div`
+    display: flex;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 72px;
+`
+export const ContainerTrending = styled.div`
+    margin-left: 2rem;
+	margin-top: 7rem;
 `
 export const Title = styled.p`
     font-family: "Oswald";
