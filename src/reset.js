@@ -45,5 +45,8 @@ table {
 }
 *{
 	box-sizing: border-box;
+}
+.ReactModal__Overlay--after-open{
+	z-index: 3;
 }`;
 export default Reset;
