@@ -38,7 +38,7 @@ const Posts = () => {
 			const { data } = await api.get("/timeline", config);
 			setPosts(data);
 			setNewPosts(data);
-			setHasMoreItems(true);
+			setHasMoreItems(data.length === 10);
 		} catch (error) {
 			alert(
 				"An error occured while trying to fetch the posts, please refresh the page"
