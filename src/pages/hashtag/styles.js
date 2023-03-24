@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width: 100vw;
     min-height: 100vh;
     height: 100%;
     background: #333333;
@@ -22,7 +21,6 @@ export const Title = styled.p`
     margin-bottom: 40px;
     margin-top: 1rem;
     @media (max-width: 710px){
-        width: 100vw;
         margin-left: 1.5rem;
     }
 `
