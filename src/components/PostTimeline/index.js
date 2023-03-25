@@ -123,8 +123,8 @@ const PostTimeline = (props) => {
 					}
 					<p data-test="counter" data-tooltip-id={`${post.id}`} className={`numLikes`}>{numLikes} likes</p>
 					<Tooltip id={`${post.id}`} content={tooltipContent} place="bottom" data-test="tooltip" className="tooltip"></Tooltip>
-					<AiOutlineComment color="white" onClick={() => setShowComments(!showComments)} />
-					<p>{numComments} comments</p>
+					<AiOutlineComment color="white" onClick={() => setShowComments(!showComments)} data-test="comment-btn" />
+					<p data-test="comment-counter">{numComments} comments</p>
 				</S.SideBar>
 				<S.ContainerContent>
 					<S.PostTop>

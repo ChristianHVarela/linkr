@@ -44,7 +44,7 @@ export default function ShowComments({ image, postId, setNumComments }) {
     }
 
     return (
-        <ContainerComments>
+        <ContainerComments data-test="comment-box">
             {
                 loading ?
                 <ThreeDots
@@ -58,7 +58,7 @@ export default function ShowComments({ image, postId, setNumComments }) {
                         visible={true}
                         /> :
                 comments.map((c, i) =>
-                    <CommentContainer key={i}>
+                    <CommentContainer key={i} data-test="comment" >
                         <UserImage src={c.image} />
                         <div>
                             <UserName>
@@ -73,8 +73,8 @@ export default function ShowComments({ image, postId, setNumComments }) {
             <MyComment>
                 <UserImage src={image} alt="" />
                 <form onSubmit={handleSubmit}>
-                    <input type='text' placeholder="write a comment..." value={newComment} onChange={(e) => setNewComment(e.target.value)} required={true} maxLength='255' />
-                    <SendButton type="Submit">
+                    <input type='text' placeholder="write a comment..." value={newComment} onChange={(e) => setNewComment(e.target.value)} required={true} maxLength='255' data-test="comment-input" />
+                    <SendButton type="Submit" data-test="comment-submit" >
                         <FiSend />
                     </SendButton>
                 </form>
