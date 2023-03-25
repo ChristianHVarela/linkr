@@ -16,12 +16,10 @@ export default function DesktopSearchBar(props) {
   async function searchingUser(e) {
     setSearchQuery(e.target.value);
     const searchText = { searchQuery: e.target.value };
-    console.log(searchText);
     if (searchText.searchQuery.length >= 3) {
       try {
         const searchResult = await api.post("/user", searchText, config);
         setSearchResults(searchResult.data);
-        console.log(searchResult.data)
       } catch (error) {
         console.log(error);
       }

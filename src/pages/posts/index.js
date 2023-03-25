@@ -16,7 +16,8 @@ const Posts = () => {
 	const [newPosts, setNewPosts] = useState(null);
 	const [page, setPage] = useState(2);
 	const [hasMoreItems, setHasMoreItems] = useState(false);
-	const newCount = posts
+	const [countFollowers, setCountFollowers] = useState(null)
+	const newCount = posts && posts.length > 0
 		? newPosts.map((e) => e.id).indexOf(posts[0].id)
 		: null;
 
@@ -27,7 +28,9 @@ const Posts = () => {
 	useInterval(async () => {
 		try {
 			const { data } = await api.get("/timeline", config);
-			setNewPosts(data);
+			const dataPosts = data.body
+			setCountFollowers(Number(data.countFollowers))
+			setNewPosts(dataPosts);
 		} catch (e) {
 			console.log(`Couldn't fetch new posts: ${e}`);
 		}
@@ -36,9 +39,11 @@ const Posts = () => {
 	const getPosts = async () => {
 		try {
 			const { data } = await api.get("/timeline", config);
-			setPosts(data);
-			setNewPosts(data);
-			setHasMoreItems(data.length === 10);
+			const dataPosts = data.body
+			setCountFollowers(Number(data.countFollowers ? data.countFollowers : 0))
+			setPosts(dataPosts ? dataPosts : []);
+			setNewPosts(dataPosts ? dataPosts : []);
+			setHasMoreItems(data.length > 0 ? dataPosts.length === 10 : false);
 		} catch (error) {
 			alert(
 				"An error occured while trying to fetch the posts, please refresh the page"
@@ -79,7 +84,7 @@ const Posts = () => {
 						<LoadingScroller key={0} />
 					}
 				>
-					<Timeline posts={posts} />
+					<Timeline posts={posts} countFollowers={countFollowers} />
 				</InfiniteScroll>
 			</S.ContainerCenter>
 			<S.ContainerTrending>
