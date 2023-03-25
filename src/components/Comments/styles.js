@@ -7,10 +7,57 @@ export const ContainerComments = styled.div`
   border-radius: 16px;
   margin-top: -25px;
   padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-export const Comment = styled.div`
+export const CommentContainer = styled.div`
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  box-shadow: 0px 1px #353535;
 
+  div{
+    width: 100%;
+    min-height: 17px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  p{
+    min-height: 17px;
+    font-size: 14px;
+    font-family: 'lato';
+  }
+`;
+
+export const UserName = styled.p`
+  font-weight: 700;
+  color: white;
+`;
+
+export const UserStatus = styled.span`
+  font-weight: 400;
+  color: #565656;
+  margin-left: 5px;
+`;
+
+export const Comment = styled.p`
+  font-weight: 400;
+  color: #ACACAC;
+`;
+
+export const UserImage = styled.img`
+    width: 39px;
+    height: 39px;
+    border-radius: 26.5px;
+    margin-right: 14px;
+    align-self: flex-start;
 `;
 
 export const MyComment = styled.div`
@@ -20,13 +67,6 @@ export const MyComment = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 25px;
-
-  img{
-    width: 39px;
-    height: 39px;
-    border-radius: 26.5px;
-    margin-right: 14px;
-  }
 
   form{
     width: 100%;

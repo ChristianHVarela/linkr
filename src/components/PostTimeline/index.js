@@ -19,6 +19,7 @@ const PostTimeline = (props) => {
 	const [description, setDescription] = useState(post.description);
 	const [liked, setLiked] = useState(post.liked_by_me);
 	const [numLikes, setNumLikes] = useState(Number(post.num_likes));
+	const [numComments, setNumComments] = useState(Number(post.num_comments));
 	const [likes, setLikes] = useState(post.likes);
 	const [showComments, setShowComments] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -123,7 +124,7 @@ const PostTimeline = (props) => {
 					<p data-test="counter" data-tooltip-id={`${post.id}`} className={`numLikes`}>{numLikes} likes</p>
 					<Tooltip id={`${post.id}`} content={tooltipContent} place="bottom" data-test="tooltip" className="tooltip"></Tooltip>
 					<AiOutlineComment color="white" onClick={() => setShowComments(!showComments)} />
-					<p>0 comments</p>
+					<p>{numComments} comments</p>
 				</S.SideBar>
 				<S.ContainerContent>
 					<S.PostTop>
@@ -177,7 +178,7 @@ const PostTimeline = (props) => {
 			</S.Post>
 			{
 				showComments &&
-				<ShowComments image={image} postId={post.id} />
+				<ShowComments image={image} postId={post.id} setNumComments={setNumComments} />
 			}
 
 			<DeleteModal
