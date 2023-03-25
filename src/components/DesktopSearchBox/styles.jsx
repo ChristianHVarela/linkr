@@ -80,4 +80,13 @@ export const SearchResult = styled.div`
     line-height: 23px;
     color: #515151;
   }
+
+  span {
+    font-family: "Lato";
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    color: #C5C5C5;
+    margin-left: 7px;
+  }
 `;

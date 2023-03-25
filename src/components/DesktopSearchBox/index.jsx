@@ -53,6 +53,7 @@ export default function DesktopSearchBar(props) {
           <div data-test="user-search" key={m.id} onClick={() => openUser(m.id)}>
             <img src={m.image} alt="" />
             <p>{m.name}</p>
+            {m.follows_me === '1' && <span>• following</span>}
           </div>
         ))}
       </SearchResult>
