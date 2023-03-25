@@ -9,7 +9,7 @@ export const HeaderMenuContainer = styled.header`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 3;
 
   @media screen and (max-width: 895px) {
     flex-direction: column;
