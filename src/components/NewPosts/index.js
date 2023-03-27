@@ -11,6 +11,7 @@ function ReloadPosts({ postsCount, setPosts, newPosts }) {
 	return (
 		<ReloadButton
 			onClick={handleUpdate}
+			data-test="load-btn"
 			className={loading ? "loading" : ""}
 		>
 			{`${postsCount} new posts, load more!`}{" "}
